@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0-ios</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <IsBindingProject>true</IsBindingProject>
+	  <IsPackable>true</IsPackable>
+	  <PackageId>Maui.RevenueCat.iOS</PackageId>
+	  <Version>4.9.0.2.0</Version>
+	  <PackageOutputPath>nugetoutput</PackageOutputPath>
+	  <PackageLicensePath>..\..\..\LICENSE.txt</PackageLicensePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <NativeReference Include="RevenueCat.framework">
+      <Kind>Framework</Kind>
+      <Frameworks></Frameworks>
+      <LinkerFlags></LinkerFlags>
+      <WeakFrameworks></WeakFrameworks>
+      <ForceLoad>True</ForceLoad>
+      <NeedsGccExceptionHandling>False</NeedsGccExceptionHandling>
+      <IsCxx>False</IsCxx>
+      <SmartLink>False</SmartLink>
+    </NativeReference>
+  </ItemGroup>
+
+
+</Project>
