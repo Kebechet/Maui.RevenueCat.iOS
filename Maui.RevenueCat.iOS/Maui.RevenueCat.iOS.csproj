@@ -5,10 +5,15 @@
     <ImplicitUsings>true</ImplicitUsings>
     <IsBindingProject>true</IsBindingProject>
 	  <IsPackable>true</IsPackable>
-	  <PackageId>Maui.RevenueCat.iOS</PackageId>
-	  <Version>4.9.0.2.0</Version>
-	  <PackageOutputPath>nugetoutput</PackageOutputPath>
-	  <PackageLicensePath>..\..\..\LICENSE.txt</PackageLicensePath>
+	  <PackageId>Kebechet.Maui.RevenueCat.iOS</PackageId>
+	  <PackageOutputPath>bin\nupkgOutput</PackageOutputPath>
+	  <RepositoryUrl>https://github.com/Kebechet/Maui.RevenueCat.iOS</RepositoryUrl>
+	  <PackageProjectUrl>https://github.com/Kebechet/Maui.RevenueCat.iOS</PackageProjectUrl>
+	  <PackageReadmeFile>..\README.md</PackageReadmeFile>
+	  <PackageLicenseFile>..\LICENSE.txt</PackageLicenseFile>
+	  <RepositoryType>git</RepositoryType>
+	  <Version>4.9.0.2-fix0</Version>
+	  <PackageReleaseNotes>Initial release</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,5 +34,15 @@
     </NativeReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
