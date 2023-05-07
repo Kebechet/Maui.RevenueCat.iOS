@@ -1,49 +1,69 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-ios</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>true</ImplicitUsings>
-    <IsBindingProject>true</IsBindingProject>
+	  <TargetFramework>net7.0-ios</TargetFramework>
+	  <Nullable>enable</Nullable>
+	  <ImplicitUsings>true</ImplicitUsings>
+	  <IsBindingProject>true</IsBindingProject>
 	  <IsPackable>true</IsPackable>
 	  <PackageId>Kebechet.Maui.RevenueCat.iOS</PackageId>
+	  <Description>Contains bindings for https://docs.revenuecat.com/docs/ios</Description>
 	  <PackageOutputPath>bin\nupkgOutput</PackageOutputPath>
 	  <RepositoryUrl>https://github.com/Kebechet/Maui.RevenueCat.iOS</RepositoryUrl>
 	  <PackageProjectUrl>https://github.com/Kebechet/Maui.RevenueCat.iOS</PackageProjectUrl>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
 	  <RepositoryType>git</RepositoryType>
-	  <Version>4.9.0.2-fix0</Version>
-	  <PackageReleaseNotes>Initial release</PackageReleaseNotes>
-	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <!--<GeneratePackageOnBuild>True</GeneratePackageOnBuild>-->
+	  <OutputType>Library</OutputType>
+	  <!--<RootNamespace>Purchases</RootNamespace>-->
+	  <!--<AssemblyName>Purchases</AssemblyName>-->
+	  <Version>4.9.0.2-fix5</Version>
+	  <PackageReleaseNotes>Namespace adjustments</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
-    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+  <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
+  <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <NativeReference Include="RevenueCat.framework">
-      <Kind>Framework</Kind>
-      <Frameworks></Frameworks>
-      <LinkerFlags></LinkerFlags>
-      <WeakFrameworks></WeakFrameworks>
-      <ForceLoad>True</ForceLoad>
-      <NeedsGccExceptionHandling>False</NeedsGccExceptionHandling>
-      <IsCxx>False</IsCxx>
-      <SmartLink>False</SmartLink>
-    </NativeReference>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<NativeReference Include="RevenueCat.framework">
+			<Kind>Framework</Kind>
+			<SmartLink>False</SmartLink>
+			<ForceLoad>True</ForceLoad>
+			<NeedsGccExceptionHandling>False</NeedsGccExceptionHandling>
+			<IsCxx>False</IsCxx>
+		</NativeReference>
+	</ItemGroup>
 
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\Debug</OutputPath>
+		<DefineConstants>DEBUG;</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>full</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\Release</OutputPath>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
 </Project>
