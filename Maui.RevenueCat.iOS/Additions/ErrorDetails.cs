@@ -1,4 +1,6 @@
-namespace Maui.RevenueCat.iOS.Additions;
+using Foundation;
+
+namespace RevenueCat;
 
 /// <summary>
 /// C# representation of https://github.com/RevenueCat/purchases-ios/blob/4.1.0/Purchases/Error%20Handling/ErrorDetails.swift

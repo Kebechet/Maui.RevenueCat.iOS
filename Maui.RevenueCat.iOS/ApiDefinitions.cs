@@ -3,7 +3,7 @@ using Foundation;
 using ObjCRuntime;
 using StoreKit;
 
-namespace Maui.RevenueCat.iOS;
+namespace RevenueCat;
 
 delegate void ReadyForPromotedProductCallbackHandler(RCStoreTransaction transaction, RCCustomerInfo customerInfo, NSError error, bool userCancelled);
 delegate void StartPurchaseHandler([BlockCallback] ReadyForPromotedProductCallbackHandler defermentBlock);

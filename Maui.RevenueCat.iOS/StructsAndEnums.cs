@@ -1,6 +1,6 @@
 using ObjCRuntime;
 
-namespace Maui.RevenueCat.iOS;
+namespace RevenueCat;
 
 [Native]
 public enum RCAttributionNetwork : long
