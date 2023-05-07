@@ -9,11 +9,12 @@
 	  <PackageOutputPath>bin\nupkgOutput</PackageOutputPath>
 	  <RepositoryUrl>https://github.com/Kebechet/Maui.RevenueCat.iOS</RepositoryUrl>
 	  <PackageProjectUrl>https://github.com/Kebechet/Maui.RevenueCat.iOS</PackageProjectUrl>
-	  <PackageReadmeFile>..\README.md</PackageReadmeFile>
-	  <PackageLicenseFile>..\LICENSE.txt</PackageLicenseFile>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
 	  <RepositoryType>git</RepositoryType>
 	  <Version>4.9.0.2-fix0</Version>
 	  <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,11 +36,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="LICENSE.txt">
+    <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <None Update="README.md">
+    <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
