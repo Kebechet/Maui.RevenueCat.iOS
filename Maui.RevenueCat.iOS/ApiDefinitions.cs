@@ -607,7 +607,7 @@ interface RCPurchases
     bool ForceUniversalAppStore { get; set; }
 
     // @property (nonatomic, class) BOOL simulatesAskToBuyInSandbox __attribute__((availability(maccatalyst, introduced=13.0))) __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(macos, introduced=10.14))) __attribute__((availability(ios, introduced=8.0)));
-    [Watch(6, 2), MacCatalyst(13, 0), Mac(10, 14), iOS(8, 0)]
+    //[Watch(6, 2), MacCatalyst(13, 0), Mac(10, 14), iOS(8, 0)]
     [Static]
     [Export("simulatesAskToBuyInSandbox")]
     bool SimulatesAskToBuyInSandbox { get; set; }
@@ -663,7 +663,7 @@ interface RCPurchases
     void ReadyForPromotedProduct(RCStoreProduct product, StartPurchaseHandler startPurchaseHandler);
 
     // @property (readonly, nonatomic) BOOL shouldShowPriceConsent __attribute__((availability(maccatalyst, introduced=13.4))) __attribute__((availability(ios, introduced=13.4)));
-    [MacCatalyst(13, 4), iOS(13, 4)]
+    //[MacCatalyst(13, 4), iOS(13, 4)]
     [Export("shouldShowPriceConsent")]
     bool ShouldShowPriceConsent { get; }
 
@@ -725,13 +725,13 @@ interface RCPurchases
     void PurchasePackage(RCPackage package, Action<RCStoreTransaction, RCCustomerInfo, NSError, bool> completion);
 
     // -(void)purchaseProduct:(RCStoreProduct * _Nonnull)product withPromotionalOffer:(RCPromotionalOffer * _Nonnull)promotionalOffer completion:(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, NSError * _Nullable, BOOL))completion __attribute__((availability(tvos, introduced=12.2))) __attribute__((availability(maccatalyst, introduced=13.0))) __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(macos, introduced=10.14.4))) __attribute__((availability(ios, introduced=12.2)));
-    [Watch(6, 2), TV(12, 2), MacCatalyst(13, 0), Mac(10, 14, 4), iOS(12, 2)]
+    //[Watch(6, 2), TV(12, 2), MacCatalyst(13, 0), Mac(10, 14, 4), iOS(12, 2)]
     [Export("purchaseProduct:withPromotionalOffer:completion:")]
     void PurchaseProduct(RCStoreProduct product, RCPromotionalOffer promotionalOffer,
         Action<RCStoreTransaction, RCCustomerInfo, NSError, bool> completion);
 
     // -(void)purchasePackage:(RCPackage * _Nonnull)package withPromotionalOffer:(RCPromotionalOffer * _Nonnull)promotionalOffer completion:(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, NSError * _Nullable, BOOL))completion __attribute__((availability(tvos, introduced=12.2))) __attribute__((availability(maccatalyst, introduced=13.0))) __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(macos, introduced=10.14.4))) __attribute__((availability(ios, introduced=12.2)));
-    [Watch(6, 2), TV(12, 2), MacCatalyst(13, 0), Mac(10, 14, 4), iOS(12, 2)]
+    //[Watch(6, 2), TV(12, 2), MacCatalyst(13, 0), Mac(10, 14, 4), iOS(12, 2)]
     [Export("purchasePackage:withPromotionalOffer:completion:")]
     void PurchasePackage(RCPackage package, RCPromotionalOffer promotionalOffer,
         Action<RCStoreTransaction, RCCustomerInfo, NSError, bool> completion);
@@ -755,7 +755,7 @@ interface RCPurchases
         Action<RCIntroEligibilityStatus> completion);
 
     // -(void)showPriceConsentIfNeeded __attribute__((availability(maccatalyst, introduced=13.4))) __attribute__((availability(ios, introduced=13.4)));
-    [MacCatalyst(13, 4), iOS(13, 4)]
+    //[MacCatalyst(13, 4), iOS(13, 4)]
     [Export("showPriceConsentIfNeeded")]
     void ShowPriceConsentIfNeeded();
 
@@ -764,34 +764,34 @@ interface RCPurchases
     void InvalidateCustomerInfoCache();
 
     // -(void)presentCodeRedemptionSheet __attribute__((availability(maccatalyst, unavailable))) __attribute__((availability(macos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(ios, introduced=14.0)));
-    [NoWatch, NoTV, NoMacCatalyst, NoMac, iOS(14, 0)]
+    //[NoWatch, NoTV, NoMacCatalyst, NoMac, iOS(14, 0)]
     [Export("presentCodeRedemptionSheet")]
     void PresentCodeRedemptionSheet();
 
     // -(void)getPromotionalOfferForProductDiscount:(RCStoreProductDiscount * _Nonnull)discount withProduct:(RCStoreProduct * _Nonnull)product withCompletion:(void (^ _Nonnull)(RCPromotionalOffer * _Nullable, NSError * _Nullable))completion __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=12.2))) __attribute__((availability(maccatalyst, introduced=13.0))) __attribute__((availability(macos, introduced=10.14.4))) __attribute__((availability(ios, introduced=12.2)));
-    [Watch(6, 2), TV(12, 2), MacCatalyst(13, 0), Mac(10, 14, 4), iOS(12, 2)]
+    //[Watch(6, 2), TV(12, 2), MacCatalyst(13, 0), Mac(10, 14, 4), iOS(12, 2)]
     [Export("getPromotionalOfferForProductDiscount:withProduct:withCompletion:")]
     void GetPromotionalOfferForProductDiscount(RCStoreProductDiscount discount, RCStoreProduct product,
         Action<RCPromotionalOffer, NSError> completion);
 
     // -(void)showManageSubscriptionsWithCompletion:(void (^ _Nonnull)(NSError * _Nullable))completion __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(watchos, unavailable)));
-    [NoWatch, NoTV, Mac(10, 15), iOS(13, 0)]
+    //[NoWatch, NoTV, Mac(10, 15), iOS(13, 0)]
     [Export("showManageSubscriptionsWithCompletion:")]
     void ShowManageSubscriptionsWithCompletion(Action<NSError> completion);
 
     // -(void)beginRefundRequestForProduct:(NSString * _Nonnull)productID completion:(void (^ _Nonnull)(enum RCRefundRequestStatus, NSError * _Nullable))completionHandler __attribute__((availability(tvos, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(macos, unavailable))) __attribute__((availability(ios, introduced=15.0)));
-    [NoWatch, NoTV, NoMac, iOS(15, 0)]
+    //[NoWatch, NoTV, NoMac, iOS(15, 0)]
     [Export("beginRefundRequestForProduct:completion:")]
     void BeginRefundRequestForProduct(string productID, Action<RCRefundRequestStatus, NSError> completionHandler);
 
     // -(void)beginRefundRequestForEntitlement:(NSString * _Nonnull)entitlementID completion:(void (^ _Nonnull)(enum RCRefundRequestStatus, NSError * _Nullable))completionHandler __attribute__((availability(tvos, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(macos, unavailable))) __attribute__((availability(ios, introduced=15.0)));
-    [NoWatch, NoTV, NoMac, iOS(15, 0)]
+    //[NoWatch, NoTV, NoMac, iOS(15, 0)]
     [Export("beginRefundRequestForEntitlement:completion:")]
     void BeginRefundRequestForEntitlement(string entitlementID,
         Action<RCRefundRequestStatus, NSError> completionHandler);
 
     // -(void)beginRefundRequestForActiveEntitlementWithCompletion:(void (^ _Nonnull)(enum RCRefundRequestStatus, NSError * _Nullable))completionHandler __attribute__((availability(tvos, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(macos, unavailable))) __attribute__((availability(ios, introduced=15.0)));
-    [NoWatch, NoTV, NoMac, iOS(15, 0)]
+    //[NoWatch, NoTV, NoMac, iOS(15, 0)]
     [Export("beginRefundRequestForActiveEntitlementWithCompletion:")]
     void BeginRefundRequestForActiveEntitlementWithCompletion(
         Action<RCRefundRequestStatus, NSError> completionHandler);
@@ -809,7 +809,7 @@ interface RCPlatformInfo
 }
 
 // @protocol RCPurchasesDelegate <NSObject>
-[Protocol, Model(AutoGeneratedName = true)]
+[Protocol, Model/*(AutoGeneratedName = true)*/]
 [BaseType(typeof(NSObject))]
 interface RCPurchasesDelegate
 {
@@ -822,7 +822,7 @@ interface RCPurchasesDelegate
     void ReadyForPromotedProduct(RCPurchases purchases, RCStoreProduct product, StartPurchaseHandler startPurchase);
 
     // @optional @property (readonly, nonatomic) BOOL shouldShowPriceConsent __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable))) __attribute__((availability(maccatalyst, introduced=13.4))) __attribute__((availability(ios, introduced=13.4)));
-    [NoWatch, NoTV, NoMac, MacCatalyst(13, 4), iOS(13, 4)]
+    //[NoWatch, NoTV, NoMac, MacCatalyst(13, 4), iOS(13, 4)]
     [Export("shouldShowPriceConsent")]
     bool ShouldShowPriceConsent { get; }
 }
@@ -862,12 +862,12 @@ interface RCStoreProduct : INativeObject
     [Export("productIdentifier")] string ProductIdentifier { get; }
 
     // @property (readonly, nonatomic) BOOL isFamilyShareable __attribute__((availability(watchos, introduced=8.0))) __attribute__((availability(tvos, introduced=14.0))) __attribute__((availability(macos, introduced=11.0))) __attribute__((availability(ios, introduced=14.0)));
-    [Watch(8, 0), TV(14, 0), Mac(11, 0), iOS(14, 0)]
+    //[Watch(8, 0), TV(14, 0), Mac(11, 0), iOS(14, 0)]
     [Export("isFamilyShareable")]
     bool IsFamilyShareable { get; }
 
     // @property (readonly, copy, nonatomic) SWIFT_AVAILABILITY(watchos,introduced=6.2) NSString * subscriptionGroupIdentifier __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(macos, introduced=10.14))) __attribute__((availability(tvos, introduced=12.0))) __attribute__((availability(maccatalyst, introduced=13.0))) __attribute__((availability(ios, introduced=12.0)));
-    [Watch(6, 2), TV(12, 0), MacCatalyst(13, 0), Mac(10, 14), iOS(12, 0)]
+    //[Watch(6, 2), TV(12, 0), MacCatalyst(13, 0), Mac(10, 14), iOS(12, 0)]
     [Export("subscriptionGroupIdentifier")]
     string SubscriptionGroupIdentifier { get; }
 
@@ -876,17 +876,17 @@ interface RCStoreProduct : INativeObject
     NSNumberFormatter PriceFormatter { get; }
 
     // @property (readonly, nonatomic, strong) SWIFT_AVAILABILITY(watchos,introduced=6.2) RCSubscriptionPeriod * subscriptionPeriod __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=11.2))) __attribute__((availability(macos, introduced=10.13.2))) __attribute__((availability(ios, introduced=11.2)));
-    [Watch(6, 2), TV(11, 2), Mac(10, 13, 2), iOS(11, 2)]
+    //[Watch(6, 2), TV(11, 2), Mac(10, 13, 2), iOS(11, 2)]
     [Export("subscriptionPeriod", ArgumentSemantic.Strong)]
     RCSubscriptionPeriod SubscriptionPeriod { get; }
 
     // @property (readonly, nonatomic, strong) SWIFT_AVAILABILITY(watchos,introduced=6.2) RCStoreProductDiscount * introductoryDiscount __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=11.2))) __attribute__((availability(macos, introduced=10.13.2))) __attribute__((availability(ios, introduced=11.2)));
-    [Watch(6, 2), TV(11, 2), Mac(10, 13, 2), iOS(11, 2)]
+    //[Watch(6, 2), TV(11, 2), Mac(10, 13, 2), iOS(11, 2)]
     [Export("introductoryDiscount", ArgumentSemantic.Strong)]
     RCStoreProductDiscount IntroductoryDiscount { get; }
 
     // @property (readonly, copy, nonatomic) SWIFT_AVAILABILITY(watchos,introduced=6.2) NSArray<RCStoreProductDiscount *> * discounts __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=12.2))) __attribute__((availability(macos, introduced=10.14.4))) __attribute__((availability(ios, introduced=12.2)));
-    [Watch(6, 2), TV(12, 2), Mac(10, 14, 4), iOS(12, 2)]
+    //[Watch(6, 2), TV(12, 2), Mac(10, 14, 4), iOS(12, 2)]
     [Export("discounts", ArgumentSemantic.Copy)]
     RCStoreProductDiscount[] Discounts { get; }
 
@@ -895,7 +895,7 @@ interface RCStoreProduct : INativeObject
     NSDecimalNumber Price { get; }
 
     // @property (readonly, nonatomic, strong) SWIFT_AVAILABILITY(watchos,introduced=6.2) NSDecimalNumber * pricePerMonth __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=11.2))) __attribute__((availability(macos, introduced=10.13.2))) __attribute__((availability(ios, introduced=11.2)));
-    [Watch(6, 2), TV(11, 2), Mac(10, 13, 2), iOS(11, 2)]
+    //[Watch(6, 2), TV(11, 2), Mac(10, 13, 2), iOS(11, 2)]
     [Export("pricePerMonth", ArgumentSemantic.Strong)]
     NSDecimalNumber PricePerMonth { get; }
 
@@ -953,7 +953,7 @@ interface RCStoreProductDiscount
     NSDecimalNumber Price { get; }
 
     // @property (readonly, nonatomic, strong) SWIFT_AVAILABILITY(watchos,introduced=6.2) SKProductDiscount * sk1Discount __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=12.2))) __attribute__((availability(macos, introduced=10.14.4))) __attribute__((availability(ios, introduced=12.2)));
-    [Watch(6, 2), TV(12, 2), Mac(10, 14, 4), iOS(12, 2)]
+    //[Watch(6, 2), TV(12, 2), Mac(10, 14, 4), iOS(12, 2)]
     [Export("sk1Discount", ArgumentSemantic.Strong)]
     SKProductDiscount Sk1Discount { get; }
 }
@@ -1012,12 +1012,12 @@ interface RCStorefront
     [Export("description")][Override] string Description { get; }
 
     // @property (readonly, nonatomic, strong) SWIFT_AVAILABILITY(maccatalyst,introduced=13.1) SKStorefront * sk1Storefront __attribute__((availability(maccatalyst, introduced=13.1))) __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
-    [Watch(6, 2), TV(13, 0), MacCatalyst(13, 1), Mac(10, 15), iOS(13, 0)]
+    //[Watch(6, 2), TV(13, 0), MacCatalyst(13, 1), Mac(10, 15), iOS(13, 0)]
     [Export("sk1Storefront", ArgumentSemantic.Strong)]
     SKStorefront Sk1Storefront { get; }
 
     // @property (readonly, nonatomic, strong, class) RCStorefront * _Nullable sk1CurrentStorefront __attribute__((availability(maccatalyst, introduced=13.1))) __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
-    [Watch(6, 2), TV(13, 0), MacCatalyst(13, 1), Mac(10, 15), iOS(13, 0)]
+    //[Watch(6, 2), TV(13, 0), MacCatalyst(13, 1), Mac(10, 15), iOS(13, 0)]
     [Static]
     [NullAllowed, Export("sk1CurrentStorefront", ArgumentSemantic.Strong)]
     RCStorefront Sk1CurrentStorefront { get; }
