@@ -3,6 +3,10 @@
 	  <TargetFramework>net7.0-ios</TargetFramework>
 	  <Nullable>enable</Nullable>
 	  <ImplicitUsings>true</ImplicitUsings>
+	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	  <PlatformTarget>AnyCPU</PlatformTarget>
+	  <SupportedOSPlatformVersion>15.4</SupportedOSPlatformVersion>
+
 	  <IsBindingProject>true</IsBindingProject>
 	  <IsPackable>true</IsPackable>
 	  <PackageId>Kebechet.Maui.RevenueCat.iOS</PackageId>
@@ -12,19 +16,41 @@
 	  <PackageProjectUrl>https://github.com/Kebechet/Maui.RevenueCat.iOS</PackageProjectUrl>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
-	  <RepositoryType>git</RepositoryType>
+	  <!--<RepositoryType>git</RepositoryType>-->
 	  <!--<GeneratePackageOnBuild>True</GeneratePackageOnBuild>-->
-	  <OutputType>Library</OutputType>
+	  <!--<OutputType>Library</OutputType>-->
 	  <!--<RootNamespace>Purchases</RootNamespace>-->
 	  <!--<AssemblyName>Purchases</AssemblyName>-->
 	  <Version>4.9.0.2-fix5</Version>
 	  <PackageReleaseNotes>Namespace adjustments</PackageReleaseNotes>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+
+	  <!--<NoBindingEmbedding>true</NoBindingEmbedding>-->
   </PropertyGroup>
 
   <ItemGroup>
-  <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
-  <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+	<ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
+	<ObjcBindingCoreSource Include="StructsAndEnums.cs" />
   </ItemGroup>
+
+	<ItemGroup>
+		<NativeReference Include="nativelib\RevenueCat.framework">
+			<Kind>Framework</Kind>
+			<!-- Specifies a space-delimited list of platform Frameworks required by the native library. -->
+			<Frameworks></Frameworks>
+			<!--<LinkerFlags>-ObjC</LinkerFlags>-->
+			<!-- This value should be set to a string containing a space-delimited list of platform Frameworks (e.g. "CoreBluetooth NewsstandKit Twitter"). -->
+			<WeakFrameworks></WeakFrameworks>
+			<!-- Specifies whether or not the -force_load clang argument is required when linking this native library. -->
+			<ForceLoad>True</ForceLoad>
+			<!-- Specifies whether or not the native library requires linking with the GCC Exception Handling library (libgcc_eh). -->
+			<NeedsGccExceptionHandling>False</NeedsGccExceptionHandling>
+			<!-- Specifies whether or not the native library is a C++ library. -->
+			<IsCxx>False</IsCxx>
+			<!-- This value should be set to true to let Xamarin.iOS determine whether ForceLoad is required or not. -->
+			<SmartLink>False</SmartLink>
+		</NativeReference>
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="..\LICENSE">
@@ -38,32 +64,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<NativeReference Include="RevenueCat.framework">
-			<Kind>Framework</Kind>
-			<SmartLink>False</SmartLink>
-			<ForceLoad>True</ForceLoad>
-			<NeedsGccExceptionHandling>False</NeedsGccExceptionHandling>
-			<IsCxx>False</IsCxx>
-		</NativeReference>
+		<PackageReference Include="Xamarin.iOS.SwiftRuntimeSupport" Version="0.2.1" />
+		<PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.2.1">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
 	</ItemGroup>
 
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-		<DebugSymbols>true</DebugSymbols>
-		<DebugType>full</DebugType>
-		<Optimize>false</Optimize>
-		<OutputPath>bin\Debug</OutputPath>
-		<DefineConstants>DEBUG;</DefineConstants>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-		<DebugType>full</DebugType>
-		<Optimize>true</Optimize>
-		<OutputPath>bin\Release</OutputPath>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	</PropertyGroup>
 </Project>
