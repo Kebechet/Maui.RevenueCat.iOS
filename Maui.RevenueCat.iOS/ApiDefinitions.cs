@@ -121,7 +121,7 @@ interface RCConfigurationBuilder
     // -(instancetype _Nonnull)initWithAPIKey:(NSString * _Nonnull)apiKey __attribute__((objc_designated_initializer));
     [Export("initWithAPIKey:")]
     [DesignatedInitializer]
-    IntPtr Constructor(string apiKey);
+    NativeHandle Constructor(string apiKey);
 
     // -(RCConfigurationBuilder * _Nonnull)withApiKey:(NSString * _Nonnull)apiKey __attribute__((warn_unused_result("")));
     [Export("withApiKey:")]
@@ -266,7 +266,7 @@ interface RCDangerousSettings
     // -(instancetype _Nonnull)initWithAutoSyncPurchases:(BOOL)autoSyncPurchases __attribute__((objc_designated_initializer));
     [Export("initWithAutoSyncPurchases:")]
     [DesignatedInitializer]
-    IntPtr Constructor(bool autoSyncPurchases);
+    NativeHandle Constructor(bool autoSyncPurchases);
 }
 
 // @interface RCEntitlementInfo : NSObject
@@ -805,7 +805,7 @@ interface RCPlatformInfo
     // -(instancetype _Nonnull)initWithFlavor:(NSString * _Nonnull)flavor version:(NSString * _Nonnull)version __attribute__((objc_designated_initializer));
     [Export("initWithFlavor:version:")]
     [DesignatedInitializer]
-    IntPtr Constructor(string flavor, string version);
+    NativeHandle Constructor(string flavor, string version);
 }
 
 // @protocol RCPurchasesDelegate <NSObject>
@@ -905,7 +905,7 @@ interface RCStoreProduct : INativeObject
 
     // -(instancetype _Nonnull)initWithSk1Product:(SKProduct * _Nonnull)sk1Product;
     [Export("initWithSk1Product:")]
-    IntPtr Constructor(SKProduct sk1Product);
+    NativeHandle Constructor(SKProduct sk1Product);
 
     // @property (readonly, nonatomic, strong) SKProduct * _Nullable sk1Product;
     [NullAllowed, Export("sk1Product", ArgumentSemantic.Strong)]
