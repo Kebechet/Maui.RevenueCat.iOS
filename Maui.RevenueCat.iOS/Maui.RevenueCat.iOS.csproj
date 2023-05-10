@@ -26,6 +26,7 @@
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 
 	  <!--<NoBindingEmbedding>true</NoBindingEmbedding>-->
+	  <NoBindingEmbedding>false</NoBindingEmbedding>
   </PropertyGroup>
 
   <ItemGroup>
