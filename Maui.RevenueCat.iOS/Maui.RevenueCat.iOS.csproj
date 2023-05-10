@@ -39,7 +39,8 @@
 			<Kind>Framework</Kind>
 			<!-- Specifies a space-delimited list of platform Frameworks required by the native library. -->
 			<Frameworks></Frameworks>
-			<!--<LinkerFlags>-ObjC</LinkerFlags>-->
+			<!--Additional linker flags that are required for linking the native library to an application.-->
+			<!--<LinkerFlags>-ObjC -framework RevenueCat</LinkerFlags>-->
 			<!-- This value should be set to a string containing a space-delimited list of platform Frameworks (e.g. "CoreBluetooth NewsstandKit Twitter"). -->
 			<WeakFrameworks></WeakFrameworks>
 			<!-- Specifies whether or not the -force_load clang argument is required when linking this native library. -->
