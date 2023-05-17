@@ -8,7 +8,6 @@ namespace Maui.RevenueCat.iOS;
 delegate void ReadyForPromotedProductCallbackHandler(RCStoreTransaction transaction, RCCustomerInfo customerInfo, NSError error, bool userCancelled);
 delegate void StartPurchaseHandler([BlockCallback] ReadyForPromotedProductCallbackHandler defermentBlock);
 
-
 // @interface RCAttribution : NSObject
 [BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
@@ -803,7 +802,7 @@ interface RCPurchases
     // -(void)logIn:(NSString * _Nonnull)appUserID completionHandler:(void (^ _Nonnull)(RCCustomerInfo * _Nullable, BOOL, NSError * _Nullable))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("logIn:completionHandler:")]
-    void LogIn(string appUserID, Action<RCCustomerInfo, bool, NSError> completionHandler);
+    void LogInCompletionHandler(string appUserID, Action<RCCustomerInfo, bool, NSError> completionHandler);
 
     // -(void)logOutWithCompletion:(void (^ _Nullable)(RCCustomerInfo * _Nullable, NSError * _Nullable))completion;
     [Export("logOutWithCompletion:")]
@@ -1136,20 +1135,20 @@ interface StoreKit1Wrapper
 
 	// -(void)paymentQueue:(SKPaymentQueue * _Nonnull)queue updatedTransactions:(NSArray<SKPaymentTransaction *> * _Nonnull)transactions;
 	[Export ("paymentQueue:updatedTransactions:")]
-	void PaymentQueue (SKPaymentQueue queue, SKPaymentTransaction[] transactions);
+	void PaymentQueueUpdatedTransactions(SKPaymentQueue queue, SKPaymentTransaction[] transactions);
 
 	// -(void)paymentQueue:(SKPaymentQueue * _Nonnull)queue removedTransactions:(NSArray<SKPaymentTransaction *> * _Nonnull)transactions;
 	[Export ("paymentQueue:removedTransactions:")]
-	void PaymentQueue (SKPaymentQueue queue, SKPaymentTransaction[] transactions);
+	void PaymentQueueRemovedTransactions(SKPaymentQueue queue, SKPaymentTransaction[] transactions);
 
 	// -(BOOL)paymentQueue:(SKPaymentQueue * _Nonnull)queue shouldAddStorePayment:(SKPayment * _Nonnull)payment forProduct:(SKProduct * _Nonnull)product __attribute__((swift_name("paymentQueue(_:shouldAddStorePayment:for:)"))) __attribute__((warn_unused_result("")));
 	[Export ("paymentQueue:shouldAddStorePayment:forProduct:")]
-	bool PaymentQueue (SKPaymentQueue queue, SKPayment payment, SKProduct product);
+	bool PaymentQueueShouldAddStorePayment(SKPaymentQueue queue, SKPayment payment, SKProduct product);
 
 	// -(void)paymentQueue:(SKPaymentQueue * _Nonnull)queue didRevokeEntitlementsForProductIdentifiers:(NSArray<NSString *> * _Nonnull)productIdentifiers __attribute__((swift_name("paymentQueue(_:didRevokeEntitlementsForProductIdentifiers:)"))) __attribute__((availability(watchos, introduced=7.0))) __attribute__((availability(tvos, introduced=14.0))) __attribute__((availability(macos, introduced=11.0))) __attribute__((availability(ios, introduced=14.0)));
 	//[Watch (7,0), TV (14,0), Mac (11,0), iOS (14,0)]
 	[Export ("paymentQueue:didRevokeEntitlementsForProductIdentifiers:")]
-	void PaymentQueue (SKPaymentQueue queue, string[] productIdentifiers);
+	void PaymentQueueDidRevokeEntitlementsForProductIdentifiers(SKPaymentQueue queue, string[] productIdentifiers);
 
 	// -(void)paymentQueueDidChangeStorefront:(SKPaymentQueue * _Nonnull)queue;
 	[Export ("paymentQueueDidChangeStorefront:")]
