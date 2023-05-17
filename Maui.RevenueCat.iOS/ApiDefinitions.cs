@@ -188,18 +188,6 @@ interface NetworkOperation
 	// @property (readonly, getter = isCancelled, nonatomic) BOOL cancelled;
 	[Export ("cancelled")]
 	bool Cancelled { [Bind ("isCancelled")] get; }
-
-	// -(void)main;
-	[Export ("main")]
-	void Main ();
-
-	// -(void)cancel;
-	[Export ("cancel")]
-	void Cancel ();
-
-	// @property (readonly, getter = isAsynchronous, nonatomic) BOOL asynchronous;
-	[Export ("asynchronous")]
-	bool Asynchronous { [Bind ("isAsynchronous")] get; }
 }
 
 // @interface RCConfiguration : NSObject
