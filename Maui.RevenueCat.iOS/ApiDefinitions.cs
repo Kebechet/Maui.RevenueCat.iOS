@@ -5,18 +5,7 @@ using StoreKit;
 
 namespace Maui.RevenueCat.iOS;
 
-[Static]
-//[Verify (ConstantsInterfaceAssociation)]
-partial interface Constants
-{
-	// extern double RevenueCatVersionNumber;
-	[Field ("RevenueCatVersionNumber", "__Internal")]
-	double RevenueCatVersionNumber { get; }
 
-	// extern const unsigned char[] RevenueCatVersionString;
-	[Field ("RevenueCatVersionString", "__Internal")]
-	byte[] RevenueCatVersionString { get; }
-}
 
 // @interface RCAttribution : NSObject
 [BaseType (typeof(NSObject))]
