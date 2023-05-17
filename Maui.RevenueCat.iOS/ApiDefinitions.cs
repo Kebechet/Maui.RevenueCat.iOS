@@ -1,8 +1,6 @@
 using System;
 using Foundation;
 using ObjCRuntime;
-//using ObjectiveC;
-//using RevenueCat;
 using StoreKit;
 
 namespace Maui.RevenueCat.iOS;
