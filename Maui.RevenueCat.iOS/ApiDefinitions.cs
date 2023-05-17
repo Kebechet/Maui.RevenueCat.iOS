@@ -5,6 +5,8 @@ using ObjectiveC;
 using RevenueCat;
 using StoreKit;
 
+namespace Maui.RevenueCat.iOS;
+
 [Static]
 //[Verify (ConstantsInterfaceAssociation)]
 partial interface Constants
