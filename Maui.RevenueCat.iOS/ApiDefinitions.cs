@@ -329,7 +329,7 @@ interface RCDangerousSettings
 // @interface RCEntitlementInfo : NSObject
 [BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
-interface RCEntitlementInfo
+interface RCEntitlementInfo : INativeObject
 {
 	// @property (readonly, copy, nonatomic) NSString * _Nonnull identifier;
 	[Export ("identifier")]
@@ -493,7 +493,7 @@ interface FakeTrackingManager
 // @interface RCIntroEligibility : NSObject
 [BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
-interface RCIntroEligibility
+interface RCIntroEligibility : INativeObject
 {
 	// @property (readonly, nonatomic) enum RCIntroEligibilityStatus status;
 	[Export ("status")]
@@ -525,7 +525,7 @@ interface RCNonSubscriptionTransaction
 // @interface RCOffering : NSObject
 [BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
-interface RCOffering
+interface RCOffering : INativeObject
 {
 	// @property (readonly, copy, nonatomic) NSString * _Nonnull identifier;
 	[Export ("identifier")]
@@ -717,7 +717,7 @@ interface ProductsFetcherSK1
 // @interface RCPromotionalOffer : NSObject
 [BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
-interface RCPromotionalOffer
+interface RCPromotionalOffer : INativeObject
 {
 	// @property (readonly, nonatomic, strong) RCStoreProductDiscount * _Nonnull discount;
 	[Export ("discount", ArgumentSemantic.Strong)]
@@ -1227,7 +1227,7 @@ interface StoreKitRequestFetcher
 // @interface RCStoreProduct : NSObject
 [BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
-interface RCStoreProduct
+interface RCStoreProduct : INativeObject
 {
 	// -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
 	[Export ("isEqual:")]
