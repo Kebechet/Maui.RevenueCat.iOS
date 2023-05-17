@@ -24,7 +24,7 @@
       <PackageLicenseFile>LICENSE</PackageLicenseFile>
       <RepositoryType>git</RepositoryType>
       <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-      <Version>4.19.0-preview1</Version>
+      <Version>4.19.0.0-preview1</Version>
       <PackageReleaseNotes>Update to latest native library</PackageReleaseNotes>
   </PropertyGroup>
 
