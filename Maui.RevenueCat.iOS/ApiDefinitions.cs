@@ -6,7 +6,7 @@ using RevenueCat;
 using StoreKit;
 
 [Static]
-[Verify (ConstantsInterfaceAssociation)]
+//[Verify (ConstantsInterfaceAssociation)]
 partial interface Constants
 {
 	// extern double RevenueCatVersionNumber;
@@ -179,7 +179,7 @@ interface RCConfigurationBuilder
 
 	// -(RCConfiguration * _Nonnull)build __attribute__((warn_unused_result("")));
 	[Export ("build")]
-	[Verify (MethodToProperty)]
+	//[Verify (MethodToProperty)]
 	RCConfiguration Build { get; }
 }
 
@@ -528,7 +528,7 @@ interface FakeASIdManager
 	// +(FakeASIdManager * _Nonnull)sharedManager __attribute__((warn_unused_result("")));
 	[Static]
 	[Export ("sharedManager")]
-	[Verify (MethodToProperty)]
+	//[Verify (MethodToProperty)]
 	FakeASIdManager SharedManager { get; }
 }
 
@@ -539,7 +539,7 @@ interface FakeAfficheClient
 	// +(FakeAfficheClient * _Nonnull)sharedClient __attribute__((warn_unused_result("")));
 	[Static]
 	[Export ("sharedClient")]
-	[Verify (MethodToProperty)]
+	//[Verify (MethodToProperty)]
 	FakeAfficheClient SharedClient { get; }
 
 	// -(void)requestAttributionDetailsWithBlock:(void (^ _Nonnull)(NSDictionary<NSString *,NSObject *> * _Nullable, NSError * _Nullable))completionHandler;
@@ -554,7 +554,7 @@ interface FakeTrackingManager
 	// +(NSInteger)trackingAuthorizationStatus __attribute__((warn_unused_result("")));
 	[Static]
 	[Export ("trackingAuthorizationStatus")]
-	[Verify (MethodToProperty)]
+	//[Verify (MethodToProperty)]
 	nint TrackingAuthorizationStatus { get; }
 }
 
@@ -1422,7 +1422,7 @@ interface RCPurchases : IRCPurchasesType
 	// +(BOOL)canMakePayments __attribute__((warn_unused_result("")));
 	[Static]
 	[Export ("canMakePayments")]
-	[Verify (MethodToProperty)]
+	//[Verify (MethodToProperty)]
 	bool CanMakePayments { get; }
 
 	// @property (copy, nonatomic, class) void (^ _Nonnull)(enum RCLogLevel, NSString * _Nonnull) logHandler;
@@ -2715,7 +2715,7 @@ interface TrackingManagerProxy
 
 	// -(NSInteger)trackingAuthorizationStatus __attribute__((warn_unused_result("")));
 	[Export ("trackingAuthorizationStatus")]
-	[Verify (MethodToProperty)]
+	//[Verify (MethodToProperty)]
 	nint TrackingAuthorizationStatus { get; }
 }
 
