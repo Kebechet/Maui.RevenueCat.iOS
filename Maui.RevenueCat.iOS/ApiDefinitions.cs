@@ -191,14 +191,14 @@ interface RCConfigurationBuilder
 interface RCConfigurationBuilder_RevenueCat_Swift_4031
 {
 	// -(RCConfigurationBuilder * _Nonnull)withUsesStoreKit2IfAvailable:(BOOL)usesStoreKit2IfAvailable __attribute__((warn_unused_result(""))) __attribute__((deprecated("
-    RevenueCat currently uses StoreKit 1 for purchases, as its stability in production scenarios has
-    proven to be more performant than StoreKit 2.
+    //RevenueCat currently uses StoreKit 1 for purchases, as its stability in production scenarios has
+    //proven to be more performant than StoreKit 2.
 
-    We're collecting more data on the best approach, but StoreKit 1 vs StoreKit 2 is an implementation detail
-    that you shouldn't need to care about.
+    //We're collecting more data on the best approach, but StoreKit 1 vs StoreKit 2 is an implementation detail
+    //that you shouldn't need to care about.
 
-    Simply remove this method call to let RevenueCat decide for you which StoreKit implementation to use.
-    ")));
+    //Simply remove this method call to let RevenueCat decide for you which StoreKit implementation to use.
+    //")));
 	[Export ("withUsesStoreKit2IfAvailable:")]
 	RCConfigurationBuilder WithUsesStoreKit2IfAvailable (bool usesStoreKit2IfAvailable);
 }
