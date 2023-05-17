@@ -282,17 +282,9 @@ interface RCCustomerInfo
 	[return: NullAllowed]
 	NSDate PurchaseDateForEntitlement (string entitlementIdentifier);
 
-	// -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
-	[Export ("isEqual:")]
-	bool IsEqual ([NullAllowed] NSObject @object);
-
 	// @property (readonly, nonatomic) NSUInteger hash;
 	[Export ("hash")]
 	nuint Hash { get; }
-
-	// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
-	[Export ("description")]
-	string Description { get; }
 
 	// @property (readonly, copy, nonatomic) NSDictionary<NSString *,id> * _Nonnull rawData;
 	[Export ("rawData", ArgumentSemantic.Copy)]
@@ -394,14 +386,6 @@ interface RCEntitlementInfo : INativeObject
 	[Export ("rawData", ArgumentSemantic.Copy)]
 	NSDictionary<NSString, NSObject> RawData { get; }
 
-	// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
-	[Export ("description")]
-	string Description { get; }
-
-	// -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
-	[Export ("isEqual:")]
-	bool IsEqual ([NullAllowed] NSObject @object);
-
 	// @property (readonly, nonatomic) NSUInteger hash;
 	[Export ("hash")]
 	nuint Hash { get; }
@@ -433,14 +417,6 @@ interface RCEntitlementInfos
 	//[Watch (6, 2), TV (13, 0), Mac (10, 15), iOS (13, 0)]
 	[Export ("verification")]
 	RCVerificationResult Verification { get; }
-
-	// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
-	[Export ("description")]
-	string Description { get; }
-
-	// -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
-	[Export ("isEqual:")]
-	bool IsEqual ([NullAllowed] NSObject @object);
 
 	// @property (readonly, copy, nonatomic) NSDictionary<NSString *,RCEntitlementInfo *> * _Nonnull active;
 	[Export ("active", ArgumentSemantic.Copy)]
@@ -500,10 +476,6 @@ interface RCIntroEligibility : INativeObject
 	// @property (readonly, nonatomic) enum RCIntroEligibilityStatus status;
 	[Export ("status")]
 	RCIntroEligibilityStatus Status { get; }
-
-	// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
-	[Export ("description")]
-	string Description { get; }
 }
 
 // @interface RCNonSubscriptionTransaction : NSObject
@@ -569,10 +541,6 @@ interface RCOffering : INativeObject
 	[NullAllowed, Export ("weekly", ArgumentSemantic.Strong)]
 	RCPackage Weekly { get; }
 
-	// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
-	[Export ("description")]
-	string Description { get; }
-
 	// -(RCPackage * _Nullable)packageWithIdentifier:(NSString * _Nullable)identifier __attribute__((warn_unused_result("")));
 	[Export ("packageWithIdentifier:")]
 	[return: NullAllowed]
@@ -606,10 +574,6 @@ interface RCOfferings
 	[Export ("objectForKeyedSubscript:")]
 	[return: NullAllowed]
 	RCOffering ObjectForKeyedSubscript (string key);
-
-	// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
-	[Export ("description")]
-	string Description { get; }
 }
 
 // @interface RCPackage : NSObject
@@ -640,10 +604,6 @@ interface RCPackage
 	// @property (readonly, copy, nonatomic) NSString * _Nullable localizedIntroductoryPriceString;
 	[NullAllowed, Export ("localizedIntroductoryPriceString")]
 	string LocalizedIntroductoryPriceString { get; }
-
-	// -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
-	[Export ("isEqual:")]
-	bool IsEqual ([NullAllowed] NSObject @object);
 
 	// @property (readonly, nonatomic) NSUInteger hash;
 	[Export ("hash")]
@@ -754,10 +714,6 @@ interface RCPromotionalOfferSignedData
 	// @property (readonly, nonatomic) NSInteger timestamp;
 	[Export ("timestamp")]
 	nint Timestamp { get; }
-
-	// -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
-	[Export ("isEqual:")]
-	bool IsEqual ([NullAllowed] NSObject @object);
 }
 
 // @interface RCPurchases : NSObject <RCPurchasesType>
@@ -1231,10 +1187,6 @@ interface StoreKitRequestFetcher
 [DisableDefaultCtor]
 interface RCStoreProduct : INativeObject
 {
-	// -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
-	[Export ("isEqual:")]
-	bool IsEqual ([NullAllowed] NSObject @object);
-
 	// @property (readonly, nonatomic) NSUInteger hash;
 	[Export ("hash")]
 	nuint Hash { get; }
@@ -1351,10 +1303,6 @@ interface RCStoreProductDiscount
 	[Export ("type")]
 	RCDiscountType Type { get; }
 
-	// -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
-	[Export ("isEqual:")]
-	bool IsEqual ([NullAllowed] NSObject @object);
-
 	// @property (readonly, nonatomic) NSUInteger hash;
 	[Export ("hash")]
 	nuint Hash { get; }
@@ -1390,10 +1338,6 @@ interface RCStoreTransaction
 	[Export ("quantity")]
 	nint Quantity { get; }
 
-	// -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
-	[Export ("isEqual:")]
-	bool IsEqual ([NullAllowed] NSObject @object);
-
 	// @property (readonly, nonatomic) NSUInteger hash;
 	[Export ("hash")]
 	nuint Hash { get; }
@@ -1416,17 +1360,9 @@ interface RCStorefront
 	[Export ("identifier")]
 	string Identifier { get; }
 
-	// -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
-	[Export ("isEqual:")]
-	bool IsEqual ([NullAllowed] NSObject @object);
-
 	// @property (readonly, nonatomic) NSUInteger hash;
 	[Export ("hash")]
 	nuint Hash { get; }
-
-	// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
-	[Export ("description")]
-	string Description { get; }
 
 	// @property (readonly, nonatomic, strong) SWIFT_AVAILABILITY(maccatalyst,introduced=13.1) SKStorefront * sk1Storefront __attribute__((availability(maccatalyst, introduced=13.1))) __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
 	//[Watch (6, 2), TV (13, 0), MacCatalyst (13, 1), Mac (10, 15), iOS (13, 0)]
@@ -1452,10 +1388,6 @@ interface RCSubscriptionPeriod
 	// @property (readonly, nonatomic) enum RCSubscriptionPeriodUnit unit;
 	[Export ("unit")]
 	RCSubscriptionPeriodUnit Unit { get; }
-
-	// -(BOOL)isEqual:(id _Nullable)object __attribute__((warn_unused_result("")));
-	[Export ("isEqual:")]
-	bool IsEqual ([NullAllowed] NSObject @object);
 
 	// @property (readonly, nonatomic) NSUInteger hash;
 	[Export ("hash")]
