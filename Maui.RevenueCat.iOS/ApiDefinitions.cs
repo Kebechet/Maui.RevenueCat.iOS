@@ -172,7 +172,7 @@ interface RCConfigurationBuilder
 }
 
 // @interface NetworkOperation : NSOperation
-[BaseType (typeof(NSOperation), Name = "_TtC10RevenueCat16NetworkOperation")]
+[BaseType (typeof(NSOperation))]
 [DisableDefaultCtor]
 interface NetworkOperation
 {
@@ -419,7 +419,7 @@ interface RCEntitlementInfos
 }
 
 // @interface FakeASIdManager : NSObject
-[BaseType (typeof(NSObject), Name = "_TtC10RevenueCat15FakeASIdManager")]
+[BaseType (typeof(NSObject))]
 interface FakeASIdManager
 {
 	// +(FakeASIdManager * _Nonnull)sharedManager __attribute__((warn_unused_result("")));
@@ -430,7 +430,7 @@ interface FakeASIdManager
 }
 
 // @interface FakeAfficheClient : NSObject
-[BaseType (typeof(NSObject), Name = "_TtC10RevenueCat17FakeAfficheClient")]
+[BaseType (typeof(NSObject))]
 interface FakeAfficheClient
 {
 	// +(FakeAfficheClient * _Nonnull)sharedClient __attribute__((warn_unused_result("")));
@@ -445,7 +445,7 @@ interface FakeAfficheClient
 }
 
 // @interface FakeTrackingManager : NSObject
-[BaseType (typeof(NSObject), Name = "_TtC10RevenueCat19FakeTrackingManager")]
+[BaseType (typeof(NSObject))]
 interface FakeTrackingManager
 {
 	// +(NSInteger)trackingAuthorizationStatus __attribute__((warn_unused_result("")));
@@ -609,7 +609,7 @@ interface RCPackage
 }
 
 // @interface PaymentQueueWrapper : NSObject <PaymentQueueWrapperType>
-[BaseType (typeof(NSObject), Name = "_TtC10RevenueCat19PaymentQueueWrapper")]
+[BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
 interface PaymentQueueWrapper
 {
@@ -646,7 +646,7 @@ interface PaymentQueueWrapper
 }
 
 // @interface ProductsFetcherSK1 : NSObject
-[BaseType (typeof(NSObject), Name = "_TtC10RevenueCat18ProductsFetcherSK1")]
+[BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
 interface ProductsFetcherSK1
 {
@@ -1082,7 +1082,7 @@ interface RCPurchasesDiagnostics
 }
 
 // @interface PurchasesReceiptParser : NSObject
-[BaseType (typeof(NSObject), Name = "_TtC10RevenueCat22PurchasesReceiptParser")]
+[BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
 interface PurchasesReceiptParser
 {
@@ -1097,7 +1097,7 @@ interface PurchasesReceiptParser
 }
 
 // @interface RedirectLoggerSessionDelegate : NSObject <NSURLSessionTaskDelegate>
-[BaseType (typeof(NSObject), Name = "_TtC10RevenueCat29RedirectLoggerSessionDelegate")]
+[BaseType (typeof(NSObject))]
 interface RedirectLoggerSessionDelegate : INSUrlSessionTaskDelegate
 {
 	// -(void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task willPerformHTTPRedirection:(NSHTTPURLResponse * _Nonnull)response newRequest:(NSURLRequest * _Nonnull)request completionHandler:(void (^ _Nonnull)(NSURLRequest * _Nullable))completionHandler;
@@ -1106,7 +1106,7 @@ interface RedirectLoggerSessionDelegate : INSUrlSessionTaskDelegate
 }
 
 // @interface StoreKit1Wrapper : NSObject
-[BaseType (typeof(NSObject), Name = "_TtC10RevenueCat16StoreKit1Wrapper")]
+[BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
 interface StoreKit1Wrapper
 {
@@ -1156,7 +1156,7 @@ interface StoreKit1Wrapper
 }
 
 // @interface StoreKitRequestFetcher : NSObject
-[BaseType (typeof(NSObject), Name = "_TtC10RevenueCat22StoreKitRequestFetcher")]
+[BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
 interface StoreKitRequestFetcher
 {
@@ -1382,7 +1382,7 @@ interface RCSubscriptionPeriod
 }
 
 // @interface TrackingManagerProxy : NSObject
-[BaseType (typeof(NSObject), Name = "_TtC10RevenueCat20TrackingManagerProxy")]
+[BaseType (typeof(NSObject))]
 interface TrackingManagerProxy
 {
 	// @property (readonly, copy, nonatomic) NSString * _Nonnull authorizationStatusPropertyName;
