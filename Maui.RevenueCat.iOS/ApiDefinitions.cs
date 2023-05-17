@@ -171,24 +171,6 @@ interface RCConfigurationBuilder
 	RCConfigurationBuilder WithUsesStoreKit2IfAvailable (bool usesStoreKit2IfAvailable);
 }
 
-// @interface NetworkOperation : NSOperation
-[BaseType (typeof(NSOperation))]
-[DisableDefaultCtor]
-interface NetworkOperation
-{
-	// @property (readonly, getter = isExecuting, nonatomic) BOOL executing;
-	[Export ("executing")]
-	bool Executing { [Bind ("isExecuting")] get; }
-
-	// @property (readonly, getter = isFinished, nonatomic) BOOL finished;
-	[Export ("finished")]
-	bool Finished { [Bind ("isFinished")] get; }
-
-	// @property (readonly, getter = isCancelled, nonatomic) BOOL cancelled;
-	[Export ("cancelled")]
-	bool Cancelled { [Bind ("isCancelled")] get; }
-}
-
 // @interface RCConfiguration : NSObject
 [BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
@@ -418,43 +400,6 @@ interface RCEntitlementInfos
 	NSDictionary<NSString, RCEntitlementInfo> ActiveInAnyEnvironment { get; }
 }
 
-// @interface FakeASIdManager : NSObject
-[BaseType (typeof(NSObject))]
-interface FakeASIdManager
-{
-	// +(FakeASIdManager * _Nonnull)sharedManager __attribute__((warn_unused_result("")));
-	[Static]
-	[Export ("sharedManager")]
-	//[Verify (MethodToProperty)]
-	FakeASIdManager SharedManager { get; }
-}
-
-// @interface FakeAfficheClient : NSObject
-[BaseType (typeof(NSObject))]
-interface FakeAfficheClient
-{
-	// +(FakeAfficheClient * _Nonnull)sharedClient __attribute__((warn_unused_result("")));
-	[Static]
-	[Export ("sharedClient")]
-	//[Verify (MethodToProperty)]
-	FakeAfficheClient SharedClient { get; }
-
-	// -(void)requestAttributionDetailsWithBlock:(void (^ _Nonnull)(NSDictionary<NSString *,NSObject *> * _Nullable, NSError * _Nullable))completionHandler;
-	[Export ("requestAttributionDetailsWithBlock:")]
-	void RequestAttributionDetailsWithBlock (Action<NSDictionary<NSString, NSObject>, NSError> completionHandler);
-}
-
-// @interface FakeTrackingManager : NSObject
-[BaseType (typeof(NSObject))]
-interface FakeTrackingManager
-{
-	// +(NSInteger)trackingAuthorizationStatus __attribute__((warn_unused_result("")));
-	[Static]
-	[Export ("trackingAuthorizationStatus")]
-	//[Verify (MethodToProperty)]
-	nint TrackingAuthorizationStatus { get; }
-}
-
 // @interface RCIntroEligibility : NSObject
 [BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
@@ -606,61 +551,6 @@ interface RCPackage
 	[Static]
 	[Export ("packageTypeFrom:")]
 	RCPackageType PackageTypeFrom (string @string);
-}
-
-// @interface PaymentQueueWrapper : NSObject <PaymentQueueWrapperType>
-[BaseType (typeof(NSObject))]
-[DisableDefaultCtor]
-interface PaymentQueueWrapper
-{
-	// -(void)finishTransaction:(SKPaymentTransaction * _Nonnull)transaction completion:(void (^ _Nonnull)(void))completion;
-	[Export ("finishTransaction:completion:")]
-	void FinishTransaction (SKPaymentTransaction transaction, Action completion);
-
-	// -(void)showPriceConsentIfNeeded __attribute__((availability(maccatalyst, introduced=13.4))) __attribute__((availability(ios, introduced=13.4)));
-	//[MacCatalyst (13,4), iOS (13,4)]
-	[Export ("showPriceConsentIfNeeded")]
-	void ShowPriceConsentIfNeeded ();
-
-	// -(void)presentCodeRedemptionSheet __attribute__((availability(ios, introduced=14.0)));
-	//[iOS (14,0)]
-	[Export ("presentCodeRedemptionSheet")]
-	void PresentCodeRedemptionSheet ();
-
-	// @property (readonly, nonatomic, strong) RCStorefront * _Nullable currentStorefront;
-	[NullAllowed, Export ("currentStorefront", ArgumentSemantic.Strong)]
-	RCStorefront CurrentStorefront { get; }
-
-	// -(BOOL)paymentQueueShouldShowPriceConsent:(SKPaymentQueue * _Nonnull)paymentQueue __attribute__((warn_unused_result(""))) __attribute__((availability(maccatalyst, introduced=13.4))) __attribute__((availability(ios, introduced=13.4)));
-	//[MacCatalyst (13,4), iOS (13,4)]
-	[Export ("paymentQueueShouldShowPriceConsent:")]
-	bool PaymentQueueShouldShowPriceConsent (SKPaymentQueue paymentQueue);
-
-	// -(void)paymentQueue:(SKPaymentQueue * _Nonnull)queue updatedTransactions:(NSArray<SKPaymentTransaction *> * _Nonnull)transactions;
-	[Export ("paymentQueue:updatedTransactions:")]
-	void PaymentQueue (SKPaymentQueue queue, SKPaymentTransaction[] transactions);
-
-	// -(BOOL)paymentQueue:(SKPaymentQueue * _Nonnull)queue shouldAddStorePayment:(SKPayment * _Nonnull)payment forProduct:(SKProduct * _Nonnull)product __attribute__((swift_name("paymentQueue(_:shouldAddStorePayment:for:)"))) __attribute__((warn_unused_result("")));
-	[Export ("paymentQueue:shouldAddStorePayment:forProduct:")]
-	bool PaymentQueue (SKPaymentQueue queue, SKPayment payment, SKProduct product);
-}
-
-// @interface ProductsFetcherSK1 : NSObject
-[BaseType (typeof(NSObject))]
-[DisableDefaultCtor]
-interface ProductsFetcherSK1
-{
-	// -(void)productsRequest:(SKProductsRequest * _Nonnull)request didReceiveResponse:(SKProductsResponse * _Nonnull)response;
-	[Export ("productsRequest:didReceiveResponse:")]
-	void ProductsRequest (SKProductsRequest request, SKProductsResponse response);
-
-	// -(void)requestDidFinish:(SKRequest * _Nonnull)request;
-	[Export ("requestDidFinish:")]
-	void RequestDidFinish (SKRequest request);
-
-	// -(void)request:(SKRequest * _Nonnull)request didFailWithError:(NSError * _Nonnull)error;
-	[Export ("request:didFailWithError:")]
-	void Request (SKRequest request, NSError error);
 }
 
 // @interface RCPromotionalOffer : NSObject
@@ -1081,94 +971,6 @@ interface RCPurchasesDiagnostics
     void TestSDKHealthWithCompletion(Action<NSError> completionHandler);
 }
 
-// @interface PurchasesReceiptParser : NSObject
-[BaseType (typeof(NSObject))]
-[DisableDefaultCtor]
-interface PurchasesReceiptParser
-{
-    // -(BOOL)receiptHasTransactionsWithReceiptData:(NSData * _Nonnull)receiptData __attribute__((warn_unused_result("")));
-    [Export("receiptHasTransactionsWithReceiptData:")]
-    bool ReceiptHasTransactionsWithReceiptData(NSData receiptData);
-
-    // @property (readonly, getter = default, nonatomic, strong, class) PurchasesReceiptParser * _Nonnull default_;
-    [Static]
-    [Export("default_", ArgumentSemantic.Strong)]
-    PurchasesReceiptParser Default_ { [Bind("default")] get; }
-}
-
-// @interface RedirectLoggerSessionDelegate : NSObject <NSURLSessionTaskDelegate>
-[BaseType (typeof(NSObject))]
-interface RedirectLoggerSessionDelegate : INSUrlSessionTaskDelegate
-{
-	// -(void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task willPerformHTTPRedirection:(NSHTTPURLResponse * _Nonnull)response newRequest:(NSURLRequest * _Nonnull)request completionHandler:(void (^ _Nonnull)(NSURLRequest * _Nullable))completionHandler;
-	[Export ("URLSession:task:willPerformHTTPRedirection:newRequest:completionHandler:")]
-	void URLSession (NSUrlSession session, NSUrlSessionTask task, NSHttpUrlResponse response, NSMutableUrlRequest request, Action<NSMutableUrlRequest> completionHandler);
-}
-
-// @interface StoreKit1Wrapper : NSObject
-[BaseType (typeof(NSObject))]
-[DisableDefaultCtor]
-interface StoreKit1Wrapper
-{
-	// @property (readonly, nonatomic, strong) RCStorefront * _Nullable currentStorefront;
-	[NullAllowed, Export ("currentStorefront", ArgumentSemantic.Strong)]
-	RCStorefront CurrentStorefront { get; }
-
-	// -(BOOL)paymentQueueShouldShowPriceConsent:(SKPaymentQueue * _Nonnull)paymentQueue __attribute__((warn_unused_result(""))) __attribute__((availability(maccatalyst, introduced=13.4))) __attribute__((availability(ios, introduced=13.4)));
-	//[MacCatalyst (13,4), iOS (13,4)]
-	[Export ("paymentQueueShouldShowPriceConsent:")]
-	bool PaymentQueueShouldShowPriceConsent (SKPaymentQueue paymentQueue);
-
-	// -(void)finishTransaction:(SKPaymentTransaction * _Nonnull)transaction completion:(void (^ _Nonnull)(void))completion;
-	[Export ("finishTransaction:completion:")]
-	void FinishTransaction (SKPaymentTransaction transaction, Action completion);
-
-	// -(void)showPriceConsentIfNeeded __attribute__((availability(maccatalyst, introduced=13.4))) __attribute__((availability(ios, introduced=13.4)));
-	//[MacCatalyst (13,4), iOS (13,4)]
-	[Export ("showPriceConsentIfNeeded")]
-	void ShowPriceConsentIfNeeded ();
-
-	// -(void)presentCodeRedemptionSheet __attribute__((availability(ios, introduced=14.0)));
-	//[iOS (14,0)]
-	[Export ("presentCodeRedemptionSheet")]
-	void PresentCodeRedemptionSheet ();
-
-	// -(void)paymentQueue:(SKPaymentQueue * _Nonnull)queue updatedTransactions:(NSArray<SKPaymentTransaction *> * _Nonnull)transactions;
-	[Export ("paymentQueue:updatedTransactions:")]
-	void PaymentQueueUpdatedTransactions(SKPaymentQueue queue, SKPaymentTransaction[] transactions);
-
-	// -(void)paymentQueue:(SKPaymentQueue * _Nonnull)queue removedTransactions:(NSArray<SKPaymentTransaction *> * _Nonnull)transactions;
-	[Export ("paymentQueue:removedTransactions:")]
-	void PaymentQueueRemovedTransactions(SKPaymentQueue queue, SKPaymentTransaction[] transactions);
-
-	// -(BOOL)paymentQueue:(SKPaymentQueue * _Nonnull)queue shouldAddStorePayment:(SKPayment * _Nonnull)payment forProduct:(SKProduct * _Nonnull)product __attribute__((swift_name("paymentQueue(_:shouldAddStorePayment:for:)"))) __attribute__((warn_unused_result("")));
-	[Export ("paymentQueue:shouldAddStorePayment:forProduct:")]
-	bool PaymentQueueShouldAddStorePayment(SKPaymentQueue queue, SKPayment payment, SKProduct product);
-
-	// -(void)paymentQueue:(SKPaymentQueue * _Nonnull)queue didRevokeEntitlementsForProductIdentifiers:(NSArray<NSString *> * _Nonnull)productIdentifiers __attribute__((swift_name("paymentQueue(_:didRevokeEntitlementsForProductIdentifiers:)"))) __attribute__((availability(watchos, introduced=7.0))) __attribute__((availability(tvos, introduced=14.0))) __attribute__((availability(macos, introduced=11.0))) __attribute__((availability(ios, introduced=14.0)));
-	//[Watch (7,0), TV (14,0), Mac (11,0), iOS (14,0)]
-	[Export ("paymentQueue:didRevokeEntitlementsForProductIdentifiers:")]
-	void PaymentQueueDidRevokeEntitlementsForProductIdentifiers(SKPaymentQueue queue, string[] productIdentifiers);
-
-	// -(void)paymentQueueDidChangeStorefront:(SKPaymentQueue * _Nonnull)queue;
-	[Export ("paymentQueueDidChangeStorefront:")]
-	void PaymentQueueDidChangeStorefront (SKPaymentQueue queue);
-}
-
-// @interface StoreKitRequestFetcher : NSObject
-[BaseType (typeof(NSObject))]
-[DisableDefaultCtor]
-interface StoreKitRequestFetcher
-{
-	// -(void)requestDidFinish:(SKRequest * _Nonnull)request;
-	[Export ("requestDidFinish:")]
-	void RequestDidFinish (SKRequest request);
-
-	// -(void)request:(SKRequest * _Nonnull)request didFailWithError:(NSError * _Nonnull)error;
-	[Export ("request:didFailWithError:")]
-	void Request (SKRequest request, NSError error);
-}
-
 // @interface RCStoreProduct : NSObject
 [BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
@@ -1379,18 +1181,4 @@ interface RCSubscriptionPeriod
 	// @property (readonly, nonatomic) NSUInteger hash;
 	[Export ("hash")]
 	nuint Hash { get; }
-}
-
-// @interface TrackingManagerProxy : NSObject
-[BaseType (typeof(NSObject))]
-interface TrackingManagerProxy
-{
-	// @property (readonly, copy, nonatomic) NSString * _Nonnull authorizationStatusPropertyName;
-	[Export ("authorizationStatusPropertyName")]
-	string AuthorizationStatusPropertyName { get; }
-
-	// -(NSInteger)trackingAuthorizationStatus __attribute__((warn_unused_result("")));
-	[Export ("trackingAuthorizationStatus")]
-	//[Verify (MethodToProperty)]
-	nint TrackingAuthorizationStatus { get; }
 }
