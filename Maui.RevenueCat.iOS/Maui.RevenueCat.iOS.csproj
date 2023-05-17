@@ -5,7 +5,7 @@
       <ImplicitUsings>true</ImplicitUsings>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <PlatformTarget>AnyCPU</PlatformTarget>
-      <SupportedOSPlatformVersion>15.4</SupportedOSPlatformVersion>
+      <SupportedOSPlatformVersion>14.2</SupportedOSPlatformVersion>
       <IsBindingProject>true</IsBindingProject>
       <NoBindingEmbedding>false</NoBindingEmbedding>
       <!--<OutputType>Library</OutputType>-->
@@ -24,8 +24,8 @@
       <PackageLicenseFile>LICENSE</PackageLicenseFile>
       <RepositoryType>git</RepositoryType>
       <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-      <Version>4.9.0.2-fix7</Version>
-      <PackageReleaseNotes>Bitcode stripping</PackageReleaseNotes>
+      <Version>4.9.0.2-fix8</Version>
+      <PackageReleaseNotes>Min supported platform</PackageReleaseNotes>
   </PropertyGroup>
 
 
