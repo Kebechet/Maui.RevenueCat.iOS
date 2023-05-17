@@ -1380,10 +1380,6 @@ interface RCSubscriptionPeriod
 	// @property (readonly, nonatomic) NSUInteger hash;
 	[Export ("hash")]
 	nuint Hash { get; }
-
-	// @property (readonly, copy, nonatomic) NSString * _Nonnull debugDescription;
-	[Export ("debugDescription")]
-	string DebugDescription { get; }
 }
 
 // @interface TrackingManagerProxy : NSObject
