@@ -200,12 +200,6 @@ interface NetworkOperation
 	bool Asynchronous { [Bind ("isAsynchronous")] get; }
 }
 
-// @interface CacheableNetworkOperation : NetworkOperation
-[BaseType (typeof(NetworkOperation), Name = "_TtC10RevenueCat25CacheableNetworkOperation")]
-interface CacheableNetworkOperation
-{
-}
-
 // @interface RCConfiguration : NSObject
 [BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
@@ -496,30 +490,6 @@ interface FakeTrackingManager
 	nint TrackingAuthorizationStatus { get; }
 }
 
-// @interface GetCustomerInfoOperation : CacheableNetworkOperation
-[BaseType (typeof(CacheableNetworkOperation), Name = "_TtC10RevenueCat24GetCustomerInfoOperation")]
-interface GetCustomerInfoOperation
-{
-}
-
-// @interface GetIntroEligibilityOperation : NetworkOperation
-[BaseType (typeof(NetworkOperation), Name = "_TtC10RevenueCat28GetIntroEligibilityOperation")]
-interface GetIntroEligibilityOperation
-{
-}
-
-// @interface GetOfferingsOperation : CacheableNetworkOperation
-[BaseType (typeof(CacheableNetworkOperation), Name = "_TtC10RevenueCat21GetOfferingsOperation")]
-interface GetOfferingsOperation
-{
-}
-
-// @interface GetProductEntitlementMappingOperation : CacheableNetworkOperation
-[BaseType (typeof(CacheableNetworkOperation), Name = "_TtC10RevenueCat37GetProductEntitlementMappingOperation")]
-interface GetProductEntitlementMappingOperation
-{
-}
-
 // @interface RCIntroEligibility : NSObject
 [BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
@@ -532,12 +502,6 @@ interface RCIntroEligibility
 	// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
 	[Export ("description")]
 	string Description { get; }
-}
-
-// @interface LogInOperation : CacheableNetworkOperation
-[BaseType (typeof(CacheableNetworkOperation), Name = "_TtC10RevenueCat14LogInOperation")]
-interface LogInOperation
-{
 }
 
 // @interface RCNonSubscriptionTransaction : NSObject
@@ -767,36 +731,6 @@ interface PaymentQueueWrapper : IPaymentQueueWrapperType
 	bool PaymentQueue (SKPaymentQueue queue, SKPayment payment, SKProduct product);
 }
 
-// @interface PostAdServicesTokenOperation : NetworkOperation
-[BaseType (typeof(NetworkOperation), Name = "_TtC10RevenueCat28PostAdServicesTokenOperation")]
-interface PostAdServicesTokenOperation
-{
-}
-
-// @interface PostAttributionDataOperation : NetworkOperation
-[BaseType (typeof(NetworkOperation), Name = "_TtC10RevenueCat28PostAttributionDataOperation")]
-interface PostAttributionDataOperation
-{
-}
-
-// @interface PostOfferForSigningOperation : NetworkOperation
-[BaseType (typeof(NetworkOperation), Name = "_TtC10RevenueCat28PostOfferForSigningOperation")]
-interface PostOfferForSigningOperation
-{
-}
-
-// @interface PostReceiptDataOperation : CacheableNetworkOperation
-[BaseType (typeof(CacheableNetworkOperation), Name = "_TtC10RevenueCat24PostReceiptDataOperation")]
-interface PostReceiptDataOperation
-{
-}
-
-// @interface PostSubscriberAttributesOperation : NetworkOperation
-[BaseType (typeof(NetworkOperation), Name = "_TtC10RevenueCat33PostSubscriberAttributesOperation")]
-interface PostSubscriberAttributesOperation
-{
-}
-
 // @interface ProductsFetcherSK1 : NSObject
 [BaseType (typeof(NSObject), Name = "_TtC10RevenueCat18ProductsFetcherSK1")]
 [DisableDefaultCtor]
@@ -813,13 +747,6 @@ interface ProductsFetcherSK1
 	// -(void)request:(SKRequest * _Nonnull)request didFailWithError:(NSError * _Nonnull)error;
 	[Export ("request:didFailWithError:")]
 	void Request (SKRequest request, NSError error);
-}
-
-// @interface ProductsManager : NSObject
-[BaseType (typeof(NSObject), Name = "_TtC10RevenueCat15ProductsManager")]
-[DisableDefaultCtor]
-interface ProductsManager
-{
 }
 
 // @interface RCPromotionalOffer : NSObject
