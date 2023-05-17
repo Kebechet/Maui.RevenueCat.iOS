@@ -1157,7 +1157,7 @@ interface RedirectLoggerSessionDelegate : INSUrlSessionTaskDelegate
 {
 	// -(void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task willPerformHTTPRedirection:(NSHTTPURLResponse * _Nonnull)response newRequest:(NSURLRequest * _Nonnull)request completionHandler:(void (^ _Nonnull)(NSURLRequest * _Nullable))completionHandler;
 	[Export ("URLSession:task:willPerformHTTPRedirection:newRequest:completionHandler:")]
-	void URLSession (NSUrlSession session, NSUrlSessionTask task, NSHttpUrlResponse response, NSUrlRequest request, Action<NSURLRequest> completionHandler);
+	void URLSession (NSUrlSession session, NSUrlSessionTask task, NSHttpUrlResponse response, NSMutableUrlRequest request, Action<NSMutableUrlRequest> completionHandler);
 }
 
 // @interface StoreKit1Wrapper : NSObject
