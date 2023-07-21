@@ -13,19 +13,19 @@
       <!--<AssemblyName>Purchases</AssemblyName>-->
   </PropertyGroup>
 
+<!--Because of bug this binding is possible to build only from MAC. Final .nupkg should be ~4MB -->
   <PropertyGroup Label="NugetProperties">
       <IsPackable>true</IsPackable>
       <PackageId>Kebechet.Maui.RevenueCat.iOS</PackageId>
       <Description>Contains bindings for https://docs.revenuecat.com/docs/ios</Description>
-      <PackageOutputPath>bin\nupkgOutput</PackageOutputPath>
       <RepositoryUrl>https://github.com/Kebechet/Maui.RevenueCat.iOS</RepositoryUrl>
       <PackageProjectUrl>https://github.com/Kebechet/Maui.RevenueCat.iOS</PackageProjectUrl>
       <PackageReadmeFile>README.md</PackageReadmeFile>
       <PackageLicenseFile>LICENSE</PackageLicenseFile>
       <RepositoryType>git</RepositoryType>
       <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-      <Version>4.19.0.0-preview3</Version>
-      <PackageReleaseNotes>Update to latest native library</PackageReleaseNotes>
+      <Version>4.19.0.0</Version>
+      <PackageReleaseNotes>Set package as stable</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,7 +33,7 @@
       <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
   </ItemGroup>
 
-  <ItemGroup >
+  <ItemGroup>
       <NativeReference Include="nativelib\RevenueCat.framework">
         <Kind>Framework</Kind>
         <!-- Specifies a space-delimited list of platform Frameworks required by the native library. -->
