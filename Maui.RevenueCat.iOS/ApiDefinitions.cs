@@ -5,62 +5,8 @@ using StoreKit;
 
 namespace Maui.RevenueCat.iOS;
 
-//Action<RCLogLevel, NSString>
-delegate void LogCallbackHandler(RCLogLevel logLevel, NSString unknown);
-delegate void LogHandler([BlockCallback] LogCallbackHandler defermentBlock);
-
-//Action<RCLogLevel, NSString, NSString, NSString, nuint>
-delegate void VerboseLogCallbackHandler(RCLogLevel logLevel, NSString unknown1, NSString unknown2, NSString unknown3, nuint unknown4);
-delegate void VerboseLogHandler([BlockCallback] VerboseLogCallbackHandler defermentBlock);
-
-//Action<Action<RCStoreTransaction, RCCustomerInfo, NSError, bool>> startPurchase
-delegate void PurchaseCallbackHandler(RCStoreTransaction transaction, RCCustomerInfo customerInfo, NSError error, bool userCancelled);
-delegate void PurchaseHandler([BlockCallback] PurchaseCallbackHandler defermentBlock);
-
-//Action<RCCustomerInfo, bool, NSError>
-//https://github.com/RevenueCat/purchases-ios/blob/38972fa9de2e74eda171b10e9efecf46ee0b5fe0/Sources/Networking/Caching/LogInCallback.swift#L10
-delegate void LoginCallbackHandler(RCCustomerInfo customerInfo, bool created, NSError error);
-delegate void LoginHandler([BlockCallback] LoginCallbackHandler defermentBlock);
-
-//Action<RCCustomerInfo, NSError>
-delegate void CustomerInfoCallbackHandler(RCCustomerInfo customerInfo, NSError error);
-delegate void CustomerInfoHandler([BlockCallback] CustomerInfoCallbackHandler defermentBlock);
-
-//Action<RCStoreTransaction, RCCustomerInfo, bool, NSError>
-delegate void PurchaseWithCallbackHandler(RCStoreTransaction transaction, RCCustomerInfo customerInfo, bool unknown, NSError error);
-delegate void PurchaseWithHandler([BlockCallback] PurchaseWithCallbackHandler defermentBlock);
-
-//Action<RCOfferings, NSError>
-delegate void OfferingsCallbackHandler(RCOfferings offerings, NSError error);
-delegate void OfferingsHandler([BlockCallback] OfferingsCallbackHandler defermentBlock);
-
-//Action<NSArray<RCStoreProduct>>
-delegate void StoreProductsCallbackHandler(NSArray<RCStoreProduct> storeProducts);
-delegate void StoreProductsHandler([BlockCallback] StoreProductsCallbackHandler defermentBlock);
-
-//Action<NSDictionary<NSString, RCIntroEligibility>>
-delegate void EligibilityCallbackHandler(NSDictionary<NSString, RCIntroEligibility> eligibilities);
-delegate void EligibilityHandler([BlockCallback] EligibilityCallbackHandler defermentBlock);
-
-//Action<RCIntroEligibilityStatus>
-delegate void EligibilityStatusCallbackHandler(RCIntroEligibilityStatus eligibilityStatus);
-delegate void EligibilityStatusHandler([BlockCallback] EligibilityStatusCallbackHandler defermentBlock);
-
-//Action<RCPromotionalOffer, NSError>
-delegate void PromotionalOfferCallbackHandler(RCPromotionalOffer promotionalOffer, NSError error);
-delegate void PromotionalOfferHandler([BlockCallback] PromotionalOfferCallbackHandler defermentBlock);
-
-//Action<NSArray<RCPromotionalOffer>>
-delegate void PromotionalOffersCallbackHandler(NSArray<RCPromotionalOffer> promotionalOffers);
-delegate void PromotionalOffersHandler([BlockCallback] PromotionalOffersCallbackHandler defermentBlock);
-
-//Action<NSError>
-delegate void ErrorCallbackHandler(NSError error);
-delegate void ErrorHandler([BlockCallback] ErrorCallbackHandler defermentBlock);
-
-//Action<RCRefundRequestStatus, NSError>
-delegate void RefundRequestStatusCallbackHandler(RCRefundRequestStatus refundRequestStatus, NSError error);
-delegate void RefundRequestStatusHandler([BlockCallback] RefundRequestStatusCallbackHandler defermentBlock);
+delegate void ReadyForPromotedProductCallbackHandler(RCStoreTransaction transaction, RCCustomerInfo customerInfo, NSError error, bool userCancelled);
+delegate void StartPurchaseHandler([BlockCallback] ReadyForPromotedProductCallbackHandler defermentBlock);
 
 // @interface RCAttribution : NSObject
 [BaseType (typeof(NSObject))]
@@ -700,12 +646,12 @@ interface RCPurchases
 	// @property (copy, nonatomic, class) void (^ _Nonnull)(enum RCLogLevel, NSString * _Nonnull) logHandler;
 	[Static]
 	[Export ("logHandler", ArgumentSemantic.Copy)]
-    LogHandler LogHandler { get; set; }
+	Action<RCLogLevel, NSString> LogHandler { get; set; }
 
 	// @property (copy, nonatomic, class) void (^ _Nonnull)(enum RCLogLevel, NSString * _Nonnull, NSString * _Nullable, NSString * _Nullable, NSUInteger) verboseLogHandler;
 	[Static]
 	[Export ("verboseLogHandler", ArgumentSemantic.Copy)]
-    VerboseLogHandler VerboseLogHandler { get; set; }
+	Action<RCLogLevel, NSString, NSString, NSString, nuint> VerboseLogHandler { get; set; }
 
 	// @property (nonatomic, class) BOOL verboseLogs;
 	[Static]
@@ -732,7 +678,7 @@ interface RCPurchases
 
     // -(void)readyForPromotedProduct:(RCStoreProduct * _Nonnull)product purchase:(void (^ _Nonnull)(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, NSError * _Nullable, BOOL)))startPurchase;
     [Export("readyForPromotedProduct:purchase:")]
-    void ReadyForPromotedProduct(RCStoreProduct product, PurchaseHandler startPurchaseHandler);
+    void ReadyForPromotedProduct(RCStoreProduct product, StartPurchaseHandler startPurchaseHandler);
 
     // @property (readonly, nonatomic) BOOL shouldShowPriceConsent __attribute__((availability(maccatalyst, introduced=13.4))) __attribute__((availability(ios, introduced=13.4)));
     //[MacCatalyst (13, 4), iOS (13, 4)]
@@ -741,21 +687,21 @@ interface RCPurchases
 
     // -(void)logIn:(NSString * _Nonnull)appUserID completion:(void (^ _Nonnull)(RCCustomerInfo * _Nullable, BOOL, NSError * _Nullable))completion;
     [Export("logIn:completion:")]
-    void LogIn(string appUserID, LoginHandler loginHandler);
+    void LogIn(string appUserID, Action<RCCustomerInfo, bool, NSError> completion);
 
     // -(void)logIn:(NSString * _Nonnull)appUserID completionHandler:(void (^ _Nonnull)(RCCustomerInfo * _Nullable, BOOL, NSError * _Nullable))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("logIn:completionHandler:")]
-    void LogInCompletionHandler(string appUserID, LoginHandler loginHandler);
+    void LogInCompletionHandler(string appUserID, Action<RCCustomerInfo, bool, NSError> completionHandler);
 
     // -(void)logOutWithCompletion:(void (^ _Nullable)(RCCustomerInfo * _Nullable, NSError * _Nullable))completion;
     [Export("logOutWithCompletion:")]
-    void LogOutWithCompletion([NullAllowed] CustomerInfoHandler customerInfoHandler);
+    void LogOutWithCompletion([NullAllowed] Action<RCCustomerInfo, NSError> completion);
 
     // -(void)logOutWithCompletionHandler:(void (^ _Nonnull)(RCCustomerInfo * _Nullable, NSError * _Nullable))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("logOutWithCompletionHandler:")]
-    void LogOutWithCompletionHandler(CustomerInfoHandler customerInfoHandler);
+    void LogOutWithCompletionHandler(Action<RCCustomerInfo, NSError> completionHandler);
 
     // +(RCPurchases * _Nonnull)configureWithConfiguration:(RCConfiguration * _Nonnull)configuration;
     [Static]
@@ -792,12 +738,12 @@ interface RCPurchases
 
     // -(void)getOfferingsWithCompletion:(void (^ _Nonnull)(RCOfferings * _Nullable, NSError * _Nullable))completion;
     [Export("getOfferingsWithCompletion:")]
-    void GetOfferingsWithCompletion(OfferingsHandler handler);
+    void GetOfferingsWithCompletion(Action<RCOfferings, NSError> completion);
 
     // -(void)offeringsWithCompletionHandler:(void (^ _Nonnull)(RCOfferings * _Nullable, NSError * _Nullable))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("offeringsWithCompletionHandler:")]
-    void OfferingsWithCompletionHandler(OfferingsHandler handler);
+    void OfferingsWithCompletionHandler(Action<RCOfferings, NSError> completionHandler);
 
     // @property (nonatomic, class) BOOL automaticAppleSearchAdsAttributionCollection __attribute__((deprecated("Use Purchases.shared.attribution.enableAdServicesAttributionTokenCollection() instead")));
     [Static]
@@ -806,104 +752,104 @@ interface RCPurchases
 
     // -(void)getCustomerInfoWithCompletion:(void (^ _Nonnull)(RCCustomerInfo * _Nullable, NSError * _Nullable))completion;
     [Export("getCustomerInfoWithCompletion:")]
-    void GetCustomerInfoWithCompletion(CustomerInfoHandler customerInfoHandler);
+    void GetCustomerInfoWithCompletion(Action<RCCustomerInfo, NSError> completion);
 
     // -(void)getCustomerInfoWithFetchPolicy:(enum RCCacheFetchPolicy)fetchPolicy completion:(void (^ _Nonnull)(RCCustomerInfo * _Nullable, NSError * _Nullable))completion;
     [Export("getCustomerInfoWithFetchPolicy:completion:")]
-    void GetCustomerInfoWithFetchPolicy(RCCacheFetchPolicy fetchPolicy, CustomerInfoHandler customerInfoHandler);
+    void GetCustomerInfoWithFetchPolicy(RCCacheFetchPolicy fetchPolicy, Action<RCCustomerInfo, NSError> completion);
 
     // -(void)customerInfoWithCompletionHandler:(void (^ _Nonnull)(RCCustomerInfo * _Nullable, NSError * _Nullable))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("customerInfoWithCompletionHandler:")]
-    void CustomerInfoWithCompletionHandler(CustomerInfoHandler customerInfoHandler);
+    void CustomerInfoWithCompletionHandler(Action<RCCustomerInfo, NSError> completionHandler);
 
     // -(void)customerInfoWithFetchPolicy:(enum RCCacheFetchPolicy)fetchPolicy completionHandler:(void (^ _Nonnull)(RCCustomerInfo * _Nullable, NSError * _Nullable))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("customerInfoWithFetchPolicy:completionHandler:")]
-    void CustomerInfoWithFetchPolicy(RCCacheFetchPolicy fetchPolicy, CustomerInfoHandler customerInfoHandler);
+    void CustomerInfoWithFetchPolicy(RCCacheFetchPolicy fetchPolicy, Action<RCCustomerInfo, NSError> completionHandler);
 
     // -(void)getProductsWithIdentifiers:(NSArray<NSString *> * _Nonnull)productIdentifiers completion:(void (^ _Nonnull)(NSArray<RCStoreProduct *> * _Nonnull))completion;
     [Export("getProductsWithIdentifiers:completion:")]
-    void GetProductsWithIdentifiers(string[] productIdentifiers, StoreProductsHandler handler);
+    void GetProductsWithIdentifiers(string[] productIdentifiers, Action<NSArray<RCStoreProduct>> completion);
 
     // -(void)products:(NSArray<NSString *> * _Nonnull)productIdentifiers completionHandler:(void (^ _Nonnull)(NSArray<RCStoreProduct *> * _Nonnull))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("products:completionHandler:")]
-    void Products(string[] productIdentifiers, StoreProductsHandler handler);
+    void Products(string[] productIdentifiers, Action<NSArray<RCStoreProduct>> completionHandler);
 
     // -(void)purchaseProduct:(RCStoreProduct * _Nonnull)product withCompletion:(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, NSError * _Nullable, BOOL))completion;
     [Export("purchaseProduct:withCompletion:")]
-    void PurchaseProduct(RCStoreProduct product, PurchaseHandler purchaseHandler);
+    void PurchaseProduct(RCStoreProduct product, Action<RCStoreTransaction, RCCustomerInfo, NSError, bool> completion);
 
     // -(void)purchaseWithProduct:(RCStoreProduct * _Nonnull)product completionHandler:(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, BOOL, NSError * _Nullable))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("purchaseWithProduct:completionHandler:")]
-    void PurchaseWithProduct(RCStoreProduct product, PurchaseWithHandler purchaseWithHandler);
+    void PurchaseWithProduct(RCStoreProduct product, Action<RCStoreTransaction, RCCustomerInfo, bool, NSError> completionHandler);
 
     // -(void)purchasePackage:(RCPackage * _Nonnull)package withCompletion:(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, NSError * _Nullable, BOOL))completion;
     [Export("purchasePackage:withCompletion:")]
-    void PurchasePackage(RCPackage package, PurchaseHandler purchaseHandler);
+    void PurchasePackage(RCPackage package, Action<RCStoreTransaction, RCCustomerInfo, NSError, bool> completion);
 
     // -(void)purchaseWithPackage:(RCPackage * _Nonnull)package completionHandler:(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, BOOL, NSError * _Nullable))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("purchaseWithPackage:completionHandler:")]
-    void PurchaseWithPackage(RCPackage package, PurchaseWithHandler purchaseWithHandler);
+    void PurchaseWithPackage(RCPackage package, Action<RCStoreTransaction, RCCustomerInfo, bool, NSError> completionHandler);
 
     // -(void)syncPurchasesWithCompletion:(void (^ _Nullable)(RCCustomerInfo * _Nullable, NSError * _Nullable))completion;
     [Export("syncPurchasesWithCompletion:")]
-    void SyncPurchasesWithCompletion([NullAllowed] CustomerInfoHandler customerInfoHandler);
+    void SyncPurchasesWithCompletion([NullAllowed] Action<RCCustomerInfo, NSError> completion);
 
     // -(void)syncPurchasesWithCompletionHandler:(void (^ _Nonnull)(RCCustomerInfo * _Nullable, NSError * _Nullable))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("syncPurchasesWithCompletionHandler:")]
-    void SyncPurchasesWithCompletionHandler(CustomerInfoHandler customerInfoHandler);
+    void SyncPurchasesWithCompletionHandler(Action<RCCustomerInfo, NSError> completionHandler);
 
     // -(void)restorePurchasesWithCompletion:(void (^ _Nullable)(RCCustomerInfo * _Nullable, NSError * _Nullable))completion;
     [Export("restorePurchasesWithCompletion:")]
-    void RestorePurchasesWithCompletion([NullAllowed] CustomerInfoHandler customerInfoHandler);
+    void RestorePurchasesWithCompletion([NullAllowed] Action<RCCustomerInfo, NSError> completion);
 
     // -(void)restorePurchasesWithCompletionHandler:(void (^ _Nonnull)(RCCustomerInfo * _Nullable, NSError * _Nullable))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("restorePurchasesWithCompletionHandler:")]
-    void RestorePurchasesWithCompletionHandler(CustomerInfoHandler customerInfoHandler);
+    void RestorePurchasesWithCompletionHandler(Action<RCCustomerInfo, NSError> completionHandler);
 
     // -(void)purchaseProduct:(RCStoreProduct * _Nonnull)product withPromotionalOffer:(RCPromotionalOffer * _Nonnull)promotionalOffer completion:(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, NSError * _Nullable, BOOL))completion __attribute__((availability(tvos, introduced=12.2))) __attribute__((availability(maccatalyst, introduced=13.0))) __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(macos, introduced=10.14.4))) __attribute__((availability(ios, introduced=12.2)));
     //[Watch (6,2), TV (12,2), MacCatalyst (13,0), Mac (10,14,4), iOS (12,2)]
     [Export("purchaseProduct:withPromotionalOffer:completion:")]
-    void PurchaseProduct(RCStoreProduct product, RCPromotionalOffer promotionalOffer, PurchaseHandler purchaseHandler);
+    void PurchaseProduct(RCStoreProduct product, RCPromotionalOffer promotionalOffer, Action<RCStoreTransaction, RCCustomerInfo, NSError, bool> completion);
 
     // -(void)purchaseWithProduct:(RCStoreProduct * _Nonnull)product promotionalOffer:(RCPromotionalOffer * _Nonnull)promotionalOffer completionHandler:(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, BOOL, NSError * _Nullable))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("purchaseWithProduct:promotionalOffer:completionHandler:")]
-    void PurchaseWithProduct(RCStoreProduct product, RCPromotionalOffer promotionalOffer, PurchaseWithHandler purchaseWithHandler);
+    void PurchaseWithProduct(RCStoreProduct product, RCPromotionalOffer promotionalOffer, Action<RCStoreTransaction, RCCustomerInfo, bool, NSError> completionHandler);
 
     // -(void)purchasePackage:(RCPackage * _Nonnull)package withPromotionalOffer:(RCPromotionalOffer * _Nonnull)promotionalOffer completion:(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, NSError * _Nullable, BOOL))completion __attribute__((availability(tvos, introduced=12.2))) __attribute__((availability(maccatalyst, introduced=13.0))) __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(macos, introduced=10.14.4))) __attribute__((availability(ios, introduced=12.2)));
     //[Watch (6,2), TV (12,2), MacCatalyst (13,0), Mac (10,14,4), iOS (12,2)]
     [Export("purchasePackage:withPromotionalOffer:completion:")]
-    void PurchasePackage(RCPackage package, RCPromotionalOffer promotionalOffer, PurchaseHandler purchaseHandler);
+    void PurchasePackage(RCPackage package, RCPromotionalOffer promotionalOffer, Action<RCStoreTransaction, RCCustomerInfo, NSError, bool> completion);
 
     // -(void)purchaseWithPackage:(RCPackage * _Nonnull)package promotionalOffer:(RCPromotionalOffer * _Nonnull)promotionalOffer completionHandler:(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, BOOL, NSError * _Nullable))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("purchaseWithPackage:promotionalOffer:completionHandler:")]
-    void PurchaseWithPackage(RCPackage package, RCPromotionalOffer promotionalOffer, PurchaseWithHandler purchaseWithHandler);
+    void PurchaseWithPackage(RCPackage package, RCPromotionalOffer promotionalOffer, Action<RCStoreTransaction, RCCustomerInfo, bool, NSError> completionHandler);
 
     // -(void)checkTrialOrIntroDiscountEligibility:(NSArray<NSString *> * _Nonnull)productIdentifiers completion:(void (^ _Nonnull)(NSDictionary<NSString *,RCIntroEligibility *> * _Nonnull))completion;
     [Export("checkTrialOrIntroDiscountEligibility:completion:")]
-    void CheckTrialOrIntroDiscountEligibility(string[] productIdentifiers, EligibilityHandler handler);
+    void CheckTrialOrIntroDiscountEligibility(string[] productIdentifiers, Action<NSDictionary<NSString, RCIntroEligibility>> completion);
 
     // -(void)checkTrialOrIntroDiscountEligibilityWithProductIdentifiers:(NSArray<NSString *> * _Nonnull)productIdentifiers completionHandler:(void (^ _Nonnull)(NSDictionary<NSString *,RCIntroEligibility *> * _Nonnull))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("checkTrialOrIntroDiscountEligibilityWithProductIdentifiers:completionHandler:")]
-    void CheckTrialOrIntroDiscountEligibilityWithProductIdentifiers(string[] productIdentifiers, EligibilityHandler handler);
+    void CheckTrialOrIntroDiscountEligibilityWithProductIdentifiers(string[] productIdentifiers, Action<NSDictionary<NSString, RCIntroEligibility>> completionHandler);
 
     // -(void)checkTrialOrIntroDiscountEligibilityForProduct:(RCStoreProduct * _Nonnull)product completion:(void (^ _Nonnull)(enum RCIntroEligibilityStatus))completion;
     [Export("checkTrialOrIntroDiscountEligibilityForProduct:completion:")]
-    void CheckTrialOrIntroDiscountEligibilityForProduct(RCStoreProduct product, EligibilityStatusHandler handler);
+    void CheckTrialOrIntroDiscountEligibilityForProduct(RCStoreProduct product, Action<RCIntroEligibilityStatus> completion);
 
     // -(void)checkTrialOrIntroDiscountEligibilityWithProduct:(RCStoreProduct * _Nonnull)product completionHandler:(void (^ _Nonnull)(enum RCIntroEligibilityStatus))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("checkTrialOrIntroDiscountEligibilityWithProduct:completionHandler:")]
-    void CheckTrialOrIntroDiscountEligibilityWithProduct(RCStoreProduct product, EligibilityStatusHandler handler);
+    void CheckTrialOrIntroDiscountEligibilityWithProduct(RCStoreProduct product, Action<RCIntroEligibilityStatus> completionHandler);
 
     // -(void)showPriceConsentIfNeeded __attribute__((availability(maccatalyst, introduced=13.4))) __attribute__((availability(ios, introduced=13.4)));
     //[MacCatalyst (13,4), iOS (13,4)]
@@ -922,42 +868,42 @@ interface RCPurchases
     // -(void)getPromotionalOfferForProductDiscount:(RCStoreProductDiscount * _Nonnull)discount withProduct:(RCStoreProduct * _Nonnull)product withCompletion:(void (^ _Nonnull)(RCPromotionalOffer * _Nullable, NSError * _Nullable))completion __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=12.2))) __attribute__((availability(maccatalyst, introduced=13.0))) __attribute__((availability(macos, introduced=10.14.4))) __attribute__((availability(ios, introduced=12.2)));
     //[Watch (6,2), TV (12,2), MacCatalyst (13,0), Mac (10,14,4), iOS (12,2)]
     [Export("getPromotionalOfferForProductDiscount:withProduct:withCompletion:")]
-    void GetPromotionalOfferForProductDiscount(RCStoreProductDiscount discount, RCStoreProduct product, PromotionalOfferHandler handler);
+    void GetPromotionalOfferForProductDiscount(RCStoreProductDiscount discount, RCStoreProduct product, Action<RCPromotionalOffer, NSError> completion);
 
     // -(void)promotionalOfferForProductDiscount:(RCStoreProductDiscount * _Nonnull)discount product:(RCStoreProduct * _Nonnull)product completionHandler:(void (^ _Nonnull)(RCPromotionalOffer * _Nullable, NSError * _Nullable))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch(6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("promotionalOfferForProductDiscount:product:completionHandler:")]
-    void PromotionalOfferForProductDiscount(RCStoreProductDiscount discount, RCStoreProduct product, PromotionalOfferHandler handler);
+    void PromotionalOfferForProductDiscount(RCStoreProductDiscount discount, RCStoreProduct product, Action<RCPromotionalOffer, NSError> completionHandler);
 
     // -(void)eligiblePromotionalOffersForProduct:(RCStoreProduct * _Nonnull)product completionHandler:(void (^ _Nonnull)(NSArray<RCPromotionalOffer *> * _Nonnull))completionHandler __attribute__((availability(watchos, introduced=6.2))) __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0)));
     //[Watch (6,2), TV (13,0), Mac (10,15), iOS (13,0)]
     [Export("eligiblePromotionalOffersForProduct:completionHandler:")]
-    void EligiblePromotionalOffersForProduct(RCStoreProduct product, PromotionalOffersHandler handler);
+    void EligiblePromotionalOffersForProduct(RCStoreProduct product, Action<NSArray<RCPromotionalOffer>> completionHandler);
 
     // -(void)showManageSubscriptionsWithCompletion:(void (^ _Nonnull)(NSError * _Nullable))completion __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(watchos, unavailable)));
     //[NoWatch, NoTV, Mac (10,15), iOS (13,0)]
     [Export("showManageSubscriptionsWithCompletion:")]
-    void ShowManageSubscriptionsWithCompletion(ErrorHandler handler);
+    void ShowManageSubscriptionsWithCompletion(Action<NSError> completion);
 
     // -(void)showManageSubscriptionsWithCompletionHandler:(void (^ _Nonnull)(NSError * _Nullable))completionHandler __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(watchos, unavailable)));
     //[NoWatch, NoTV, Mac (10,15), iOS (13,0)]
     [Export("showManageSubscriptionsWithCompletionHandler:")]
-    void ShowManageSubscriptionsWithCompletionHandler(ErrorHandler handler);
+    void ShowManageSubscriptionsWithCompletionHandler(Action<NSError> completionHandler);
 
     // -(void)beginRefundRequestForProduct:(NSString * _Nonnull)productID completion:(void (^ _Nonnull)(enum RCRefundRequestStatus, NSError * _Nullable))completionHandler __attribute__((availability(tvos, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(macos, unavailable))) __attribute__((availability(ios, introduced=15.0)));
     //[NoWatch, NoTV, NoMac, iOS (15,0)]
     [Export("beginRefundRequestForProduct:completion:")]
-    void BeginRefundRequestForProduct(string productID, RefundRequestStatusHandler handler);
+    void BeginRefundRequestForProduct(string productID, Action<RCRefundRequestStatus, NSError> completionHandler);
 
     // -(void)beginRefundRequestForEntitlement:(NSString * _Nonnull)entitlementID completion:(void (^ _Nonnull)(enum RCRefundRequestStatus, NSError * _Nullable))completionHandler __attribute__((availability(tvos, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(macos, unavailable))) __attribute__((availability(ios, introduced=15.0)));
     //[NoWatch, NoTV, NoMac, iOS (15,0)]
     [Export("beginRefundRequestForEntitlement:completion:")]
-    void BeginRefundRequestForEntitlement(string entitlementID, RefundRequestStatusHandler handler);
+    void BeginRefundRequestForEntitlement(string entitlementID, Action<RCRefundRequestStatus, NSError> completionHandler);
 
     // -(void)beginRefundRequestForActiveEntitlementWithCompletion:(void (^ _Nonnull)(enum RCRefundRequestStatus, NSError * _Nullable))completionHandler __attribute__((availability(tvos, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(macos, unavailable))) __attribute__((availability(ios, introduced=15.0)));
     //[NoWatch, NoTV, NoMac, iOS (15,0)]
     [Export("beginRefundRequestForActiveEntitlementWithCompletion:")]
-    void BeginRefundRequestForActiveEntitlementWithCompletion(RefundRequestStatusHandler handler);
+    void BeginRefundRequestForActiveEntitlementWithCompletion(Action<RCRefundRequestStatus, NSError> completionHandler);
 
 	// @property (nonatomic, class) BOOL debugLogsEnabled __attribute__((deprecated("use Purchases.logLevel instead")));
 	[Static]
@@ -1001,7 +947,7 @@ interface RCPurchasesDelegate
 
 	// @optional -(void)purchases:(RCPurchases * _Nonnull)purchases readyForPromotedProduct:(RCStoreProduct * _Nonnull)product purchase:(void (^ _Nonnull)(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, NSError * _Nullable, BOOL)))startPurchase;
 	[Export ("purchases:readyForPromotedProduct:purchase:")]
-	void ReadyForPromotedProduct (RCPurchases purchases, RCStoreProduct product, PurchaseHandler startPurchase);
+	void ReadyForPromotedProduct (RCPurchases purchases, RCStoreProduct product, StartPurchaseHandler startPurchase);
 
 	// @optional @property (readonly, nonatomic) BOOL shouldShowPriceConsent __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable))) __attribute__((availability(maccatalyst, introduced=13.4))) __attribute__((availability(ios, introduced=13.4)));
 	//[NoWatch, NoTV, NoMac, MacCatalyst (13, 4), iOS (13, 4)]
@@ -1022,7 +968,7 @@ interface RCPurchasesDiagnostics
 
     // -(void)testSDKHealthWithCompletion:(void (^ _Nonnull)(NSError * _Nullable))completionHandler;
     [Export("testSDKHealthWithCompletion:")]
-    void TestSDKHealthWithCompletion(ErrorHandler handler);
+    void TestSDKHealthWithCompletion(Action<NSError> completionHandler);
 }
 
 // @interface RCStoreProduct : NSObject
