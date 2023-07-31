@@ -5,9 +5,6 @@ using StoreKit;
 
 namespace Maui.RevenueCat.iOS;
 
-delegate void ReadyForPromotedProductCallbackHandler(RCStoreTransaction transaction, RCCustomerInfo customerInfo, NSError error, bool userCancelled);
-delegate void StartPurchaseHandler([BlockCallback] ReadyForPromotedProductCallbackHandler defermentBlock);
-
 // @interface RCAttribution : NSObject
 [BaseType (typeof(NSObject))]
 [DisableDefaultCtor]
@@ -678,7 +675,7 @@ interface RCPurchases
 
     // -(void)readyForPromotedProduct:(RCStoreProduct * _Nonnull)product purchase:(void (^ _Nonnull)(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, NSError * _Nullable, BOOL)))startPurchase;
     [Export("readyForPromotedProduct:purchase:")]
-    void ReadyForPromotedProduct(RCStoreProduct product, StartPurchaseHandler startPurchaseHandler);
+    void ReadyForPromotedProduct(RCStoreProduct product, Action<Action<RCStoreTransaction, RCCustomerInfo, NSError, bool>> startPurchase);
 
     // @property (readonly, nonatomic) BOOL shouldShowPriceConsent __attribute__((availability(maccatalyst, introduced=13.4))) __attribute__((availability(ios, introduced=13.4)));
     //[MacCatalyst (13, 4), iOS (13, 4)]
@@ -947,7 +944,7 @@ interface RCPurchasesDelegate
 
 	// @optional -(void)purchases:(RCPurchases * _Nonnull)purchases readyForPromotedProduct:(RCStoreProduct * _Nonnull)product purchase:(void (^ _Nonnull)(void (^ _Nonnull)(RCStoreTransaction * _Nullable, RCCustomerInfo * _Nullable, NSError * _Nullable, BOOL)))startPurchase;
 	[Export ("purchases:readyForPromotedProduct:purchase:")]
-	void ReadyForPromotedProduct (RCPurchases purchases, RCStoreProduct product, StartPurchaseHandler startPurchase);
+	void ReadyForPromotedProduct (RCPurchases purchases, RCStoreProduct product, Action<Action<RCStoreTransaction, RCCustomerInfo, NSError, bool>> startPurchase);
 
 	// @optional @property (readonly, nonatomic) BOOL shouldShowPriceConsent __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable))) __attribute__((availability(maccatalyst, introduced=13.4))) __attribute__((availability(ios, introduced=13.4)));
 	//[NoWatch, NoTV, NoMac, MacCatalyst (13, 4), iOS (13, 4)]
