@@ -61,6 +61,7 @@ Because of a problem with bitcode I have decided to create completely new bindin
 - removed default using there were useless - [commit](https://github.com/Kebechet/Maui.RevenueCat.iOS/commit/459fc5d4bf09a4dfaaa6122c841a307f54779915)
 - removed constants interface - [commit](https://github.com/Kebechet/Maui.RevenueCat.iOS/commit/f794248fa9a524e83471526b5517d9f1046b8f04)
   - because I didnt know how to bind `byte[]` 😅
+  - (optional) If you would like to bind the `RevenueCatVersionNumber` use this for interface name: `[BaseType(typeof(NSObject))] [DisableDefaultCtor] interface RCConstants` and above the variable put `[Static]` attribute
 - removed interfaces without methods/properties - [commit](https://github.com/Kebechet/Maui.RevenueCat.iOS/commit/221c593836f6e5dd956466cafe7603585b73b932)
 - remove Protocols that were used for inheritance - [commit](https://github.com/Kebechet/Maui.RevenueCat.iOS/commit/b614289e0dbc4edefb4c6c7e024ae1586a6ebf83)
 - removed delegate that was not used anywhere - [commit](https://github.com/Kebechet/Maui.RevenueCat.iOS/commit/d408d99423226391f7b37f73791bad7fc4772326)
@@ -79,6 +80,16 @@ Because of a problem with bitcode I have decided to create completely new bindin
 - ✅ - Done 
   - I have tested this new binding in the simulator as well as on real device through TestFlight and it works as expected
 
+## Xcode
+- When latest Xcode version is out it doesn't mean MAUI/Xamarin can immediately it.
+  - You can find [here](https://github.com/xamarin/xamarin-macios/wiki) what Xcode is currently supported. Even though Xcode version is on the list make sure to check open github issues in the [xamarin-macios](https://github.com/xamarin/xamarin-macios) repo
+  - In case you want to upgrade/downgrade to specific Xcode version then:
+    - uninstall your current version
+    - download your version you want: https://developer.apple.com/download/all/
+    - extract `.xip` file and move it to `/Applications` folder
+    - after extraction open Xcode and it will ask you to install additional components (e.g. iOS)
+- In case you get error `The connection cannot continue because the remote iOS SDK was not found or is corrupted.`
+  - go to your MAC and in terminal do: `rm -rf ~/Library/Caches/Xamarin/XMA/SDKs/dotnet/`
 
 ## ⚠️**Warning**
 - in .NET 7 and with VS2022 v17.7 IT IS NOT POSSIBLE TO BUILD THE PACKAGE WITH EMBEDDED NATIVE LIBRARY (even with connected MAC).
