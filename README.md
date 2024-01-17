@@ -1,3 +1,5 @@
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/kebechet)
+
 # Maui.RevenueCat.iOS
 - this binding is based on: https://github.com/thisisthekap/Xamarin.RevenueCat.iOS 
 - it is created for .NET MAUI and targeted to `.NET 8`
@@ -92,10 +94,10 @@ Because of a problem with bitcode I have decided to create completely new bindin
   - go to your MAC and in terminal do: `rm -rf ~/Library/Caches/Xamarin/XMA/SDKs/dotnet/`
 
 ## ⚠️**Warning**
-- in .NET 7 and with VS2022 v17.7 IT IS NOT POSSIBLE TO BUILD THE PACKAGE WITH EMBEDDED NATIVE LIBRARY (even with connected MAC).
-- You need to build this package on MAC with VS for MAC. Only that way it will link native library to the package.
-- https://github.com/dotnet/maui/issues/14982
-
+- in `.NET 7` and with `VS2022` `v17.7` IT IS NOT POSSIBLE TO BUILD THE PACKAGE WITH EMBEDDED NATIVE LIBRARY (even with connected MAC).
+  - You need to build this package on MAC with VS for MAC. Only that way it will link native library to the package.
+  - https://github.com/dotnet/maui/issues/14982
+- in `VS2022` `v17.8.4` with latest `MAUI` it works correctly 
 
 # License
 This repository is licensed with the [MIT](LICENSE.txt) license.
