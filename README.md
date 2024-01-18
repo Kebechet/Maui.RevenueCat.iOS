@@ -81,15 +81,42 @@ Because of a problem with bitcode I have decided to create completely new bindin
   - later I completely removed those methods because the error was still there - [commit](https://github.com/Kebechet/Maui.RevenueCat.iOS/commit/3fcceeb6ff9d8207a3545f89ddf28639cb3c0f79)
 - ✅ - Done 
   - I have tested this new binding in the simulator as well as on real device through TestFlight and it works as expected
+## Additional fix:
+  - if you experience build error: `lang++ exited with code 1: error : Undefined symbols for architecture arm64`
+    - I experienced this problem while debugging on Remote device (iphone connected directly to MAC and that MAC connected to Windows) 
+  ```
+  "_OBJC_CLASS_$_FakeASIdManager", referenced from:
+    objc-class-ref in registrar.o
+"_OBJC_CLASS_$_FakeAfficheClient", referenced from:
+    objc-class-ref in registrar.o
+"_OBJC_CLASS_$_FakeTrackingManager", referenced from:
+    objc-class-ref in registrar.o
+"_OBJC_CLASS_$_NetworkOperation", referenced from:
+    objc-class-ref in registrar.o
+"_OBJC_CLASS_$_PaymentQueueWrapper", referenced from:
+    objc-class-ref in registrar.o
+"_OBJC_CLASS_$_ProductsFetcherSK1", referenced from:
+    objc-class-ref in registrar.o
+"_OBJC_CLASS_$_PurchasesReceiptParser", referenced from:
+    objc-class-ref in registrar.o
+"_OBJC_CLASS_$_StoreKit1Wrapper", referenced from:
+    objc-class-ref in registrar.o
+"_OBJC_CLASS_$_StoreKitRequestFetcher", referenced from:
+    objc-class-ref in registrar.o
+"_OBJC_CLASS_$_TrackingManagerProxy", referenced from:
+    objc-class-ref in registrar.o
+
+  ```
+  - then remove those types e.g. `FakeASIdManager` from `ApiDefinitions.cs` file - [commit](https://github.com/Kebechet/Maui.RevenueCat.iOS/commit/4aa727562d17829c742dcd6c2f51ba3c3cb836ff)
 
 ## Xcode
 - When latest Xcode version is out it doesn't mean MAUI/Xamarin can immediately it.
   - You can find [here](https://github.com/xamarin/xamarin-macios/wiki) what Xcode is currently supported. Even though Xcode version is on the list make sure to check open github issues in the [xamarin-macios](https://github.com/xamarin/xamarin-macios) repo
   - In case you want to upgrade/downgrade to specific Xcode version then:
     - uninstall your current version
-    - download your version you want: https://developer.apple.com/download/all/
-    - extract `.xip` file and move it to `/Applications` folder
-    - after extraction open Xcode and it will ask you to install additional components (e.g. iOS)
+    - download version you want: https://developer.apple.com/download/all/
+    - extract `.xip` file and move it's content to `/Applications` folder
+    - after extraction open Xcode and it will ask you to install additional components (e.g. iOS) so install it
 - In case you get error `The connection cannot continue because the remote iOS SDK was not found or is corrupted.`
   - go to your MAC and in terminal do: `rm -rf ~/Library/Caches/Xamarin/XMA/SDKs/dotnet/`
 
