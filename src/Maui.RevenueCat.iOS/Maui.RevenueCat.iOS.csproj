@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-      <TargetFramework>net7.0-ios</TargetFramework>
+      <TargetFramework>net8.0-ios</TargetFramework>
       <Nullable>enable</Nullable>
       <ImplicitUsings>true</ImplicitUsings>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -13,7 +13,6 @@
       <!--<AssemblyName>Purchases</AssemblyName>-->
   </PropertyGroup>
 
-<!--Because of bug this binding is possible to build only from MAC. Final .nupkg should be ~4MB -->
   <PropertyGroup Label="NugetProperties">
       <Authors>Kebechet</Authors>
       <IsPackable>true</IsPackable>
@@ -26,8 +25,8 @@
       <RepositoryType>git</RepositoryType>
       <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
       <PackageIcon>icon.png</PackageIcon>
-      <Version>4.31.9.0</Version>
-      <PackageReleaseNotes>Updated to library v4.31.9</PackageReleaseNotes>
+      <Version>4.31.9.1</Version>
+      <PackageReleaseNotes>.NET8 Upgrade</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
