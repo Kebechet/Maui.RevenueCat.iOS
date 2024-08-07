@@ -35,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-      <NativeReference Include="nativelib\RevenueCat.framework">
+      <NativeReference Include="nativelib\RevenueCat.xcframework">
         <Kind>Framework</Kind>
         <!-- Specifies a space-delimited list of platform Frameworks required by the native library. -->
         <Frameworks></Frameworks>
